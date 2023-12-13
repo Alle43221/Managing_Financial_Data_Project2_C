@@ -1,0 +1,3 @@
+C:/Users/Ale/CLionProjects/Managing_Financial_Data_Project2_C/cmake-build-debug/CMakeFiles/Managing_Financial_Data_Project2_C.dir
+C:/Users/Ale/CLionProjects/Managing_Financial_Data_Project2_C/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Ale/CLionProjects/Managing_Financial_Data_Project2_C/cmake-build-debug/CMakeFiles/rebuild_cache.dir
