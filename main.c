@@ -2,8 +2,41 @@
 #include <string.h>
 #include "time.h"
 #include <ctype.h>
+#include "stdlib.h"
+#include "validation.h"
 
 char global_user[50]="";
+
+struct Node_customer* customers_head=NULL;
+
+void insert_at_end_customer(struct Node_customer* head, char name[], char iban[], char phone[], char id[], char email[]){
+    struct Node_customer* iterator=head;
+    if(iterator==NULL){  //cazul in care este primul nod
+        struct Node_customer* new_node= (struct Node_customer*) malloc(sizeof(struct Node_customer));
+        new_node->next=NULL;
+        strcpy(new_node->data.id_string, id);
+        strcpy(new_node->data.phone, phone);
+        strcpy(new_node->data.iban, iban);
+        strcpy(new_node->data.name, name);
+        strcpy(new_node->data.email, email);
+        customers_head=new_node;
+    }
+    else
+    {
+        while(iterator->next!=NULL){
+            iterator=iterator->next;
+        }
+        struct Node_customer* new_node= (struct Node_customer*) malloc(sizeof(struct Node_customer));
+        new_node->next=NULL;
+        strcpy(new_node->data.id_string, id);
+        strcpy(new_node->data.phone, phone);
+        strcpy(new_node->data.iban, iban);
+        strcpy(new_node->data.name, name);
+        strcpy(new_node->data.email, email);
+        iterator->next=new_node;
+    }
+
+}
 
 void login_menu()
 {
@@ -80,138 +113,64 @@ void menu_text(){
     printf("---------------------------------------------\n");
 }
 
-int validare_string(char x[]){
-    /**
-    * param: char[]
-    * description: validates an array of characters
-    * return: int
-    * exceptions: array contains spaces -> return 0
-    *             array contains commas -> return 0
-    *             array contains digits -> return 0
-    */
-    if (strlen(x)==0)
-        return 0;
-    int len=strlen(x);
-    char digits[]="0123456789";
-    for(int i=0; i<len; i++){
-        if(x[i]==' ')
-            return 0;
-        else if(strchr(digits, x[i]))
-            return 0;
-        else if(x[i]==',')
-            return 0;
+void print_all(struct Node_customer *head) {
+    struct Node_customer* iterator=head;
+    while(iterator!=NULL){
+        printf("%s\n", iterator->data.name);
+        iterator=iterator->next;
     }
-    return 1;
-}
-
-int validare_iban(char x[]){
-    /**
-    * param: char[]
-    * description: validates an iban code
-    * return: int
-    * exceptions: code doesn't comply with the format "AB49ABCD1B31007593840000"
-     *  first two characters -> letters
-     *  next two characters -> digits
-     *  next four characters -> letters
-     *  remaining characters -> alphanumeric characters
-     *  total of 24 characters
-    */
-    if (strlen(x)!=24)
-        return 0;
-    if(!isalpha(x[0])|| !isalpha(x[1]))
-        return 0;
-    if(!isdigit(x[2])|| !isdigit(x[3]))
-        return 0;
-    if(!isalpha(x[4])|| !isalpha(x[5])|| !isalpha(x[6])|| !isalpha((x[7])))
-        return 0;
-
-    int len=strlen(x);
-    for(int i=8; i<len; i++){
-        if(!isdigit(x[i])&&!isalpha(x[i]))
-            return 0;
-    }
-    return 1;
-}
-
-int validare_phone(char x[]) {
-    /**
-      * param: char[]
-      * description: validates a phone number
-      * return: int
-      * exceptions: number contains non-numeric characters
-      *  total of 10 characters
-      */
-    int len=strlen(x);
-    if(len!=10)
-        return 0;
-    for(int i=0; i<len; i++){
-        if(!isdigit(x[i]))
-            return 0;
-    }
-    return 1;
-}
-
-int validare_id(char x[10]) {
-    /**
-    * param: char[]
-    * description: validates an id
-    * return: int
-    * exceptions: number contains non-numeric characters
-    */
-    int len=strlen(x);
-    if(len==0)
-        return 0;
-    for(int i=0; i<len; i++){
-        if(!isdigit(x[i]))
-            return 0;
-    }
-    return 1;
-}
-
-int validare_email(char x[10]) {
-    /**
-    * param: char[]
-    * description: validates an email address
-    * return: int
-    * exceptions: array doesn't contain the symbol "@"
-    */
-    int len=strlen(x);
-    if(len==0)
-        return 0;
-    const char simbol='@';
-    if(strchr(x, simbol)==NULL)
-        return 0;
-    return 1;
 }
 
 void add_customer(){
     char name[50]="", iban[25]="", phone[11]="", id_string[10]="", email[50]="";
-    while (validare_string(name)==0){
+    int name1=0, iban1=0, phone1=0, id1=0, email1=0;
+
+    while (name1==0){
         printf("Enter customer name:\n");
         scanf("%50s", name);
+        name1=validare_string(name);
+        if(name1==0){
+            printf("Invalid name!\n");
+        }
     }
 
-    while (validare_iban(iban)==0){
+    while (iban1==0){
         printf("Enter customer iban:\n");
         scanf("%25s", iban);
+        iban1= validare_iban(iban);
+        if(iban1==0){
+            printf("Invalid iban!\n");
+        }
     }
 
-    while (validare_phone(phone)==0){
+    while (phone1==0){
         printf("Enter customer phone number:\n");
         scanf("%11s", phone);
+        phone1= validare_phone(phone);
+        if(phone1==0){
+            printf("Invalid phone number!\n");
+        }
     }
 
-    while (validare_email(email)==0){
+    while (email1==0){
         printf("Enter customer email address:\n");
         scanf("%50s", email);
+        email1= validare_email(email);
+        if(email1==0){
+            printf("Invalid email address!\n");
+        }
     }
 
-    while (validare_id(id_string)==0){
+    while (id1==0){
         printf("Enter customer id:\n");
         scanf("%10s", id_string);
+        id1= validare_id_customer(id_string, customers_head);
+        if(id1==0){
+            printf("Invalid/Existing id!\n");
+        }
     }
 
-    //verificare existenta id
+    insert_at_end_customer(customers_head, name, iban, phone, id_string, email);
 
     char path[100];
     sprintf(path, "./%s/log.txt",global_user);
@@ -226,10 +185,26 @@ void add_customer(){
 
     sprintf(path, "./%s/customers.txt",global_user);
     FILE *file=fopen(path, "a");
-    sprintf(str, "%s,%s,%s,%s,%s",id_string,name, iban, phone, email);
+    sprintf(str, "%s,%s,%s,%s,%s\n",id_string,name, iban, phone, email);
     fwrite(str, 1, strlen(str), file);
     fclose(file);
     printf("Customer added with success!\n");
+}
+
+void load_customers(struct Node_customer *head){
+    char path[100], str[100];
+    sprintf(path, "./%s/customers.txt",global_user);
+    FILE *file=fopen(path, "r");
+    while(fgets(str, 100, file)){
+        char *id= strtok(str, ",");
+        char *name=strtok(NULL, ",");
+        char *iban=strtok(NULL, ",");
+        char *phone=strtok(NULL, ",");
+        char *email=strtok(NULL, ",");
+        insert_at_end_customer(head, name, iban, phone, id, email);
+    }
+
+    fclose(file);
 }
 
 int main(){
@@ -244,6 +219,7 @@ int main(){
     while(strlen(global_user)==0){
         login_menu();
     }
+    load_customers(customers_head);
     menu_text();
     while(strcmp(menu_choice, "exit")!=0){
         scanf("%100s", menu_choice);
@@ -251,7 +227,7 @@ int main(){
             add_customer();
         }
         else if(strcmp(menu_choice,"2")==0){
-            add_customer();
+
         }
         else{
             printf("Invalid option!\n");
