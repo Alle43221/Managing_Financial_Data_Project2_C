@@ -11,15 +11,13 @@ struct Node_customer{
     struct Node_customer* next;
 };
 
-int check_id_customer(struct Node_customer*, char[]);
-
 int validare_string(char[]);
 
 int validare_iban(char[]);
 
 int validare_phone(char[]);
 
-int validare_id_customer(char[], struct Node_customer*);
+int validare_id_customer(char[]);
 
 int validare_email(char[]);
 

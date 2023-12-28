@@ -1,10 +1,24 @@
-Login at Sat Dec 23 17:53:51 2023
-Login at Thu Dec 28 14:29:29 2023
-Added customer with id 13 at Thu Dec 28 14:30:01 2023
-Login at Thu Dec 28 14:47:10 2023
-Login at Thu Dec 28 14:47:30 2023
-Login at Thu Dec 28 16:59:55 2023
-Login at Thu Dec 28 17:00:15 2023
-Added customer with id 12 at Thu Dec 28 17:00:41 2023
-Login at Thu Dec 28 17:28:46 2023
-Added customer with id 16 at Thu Dec 28 17:29:08 2023
+Login at Thu Dec 28 18:55:21 2023
+Login at Thu Dec 28 19:14:14 2023
+Deleted customer with id 13 at Thu Dec 28 19:14:19 2023
+Login at Thu Dec 28 19:18:23 2023
+Login at Thu Dec 28 19:37:02 2023
+Deleted customer with id 13 at Thu Dec 28 19:37:07 2023
+Login at Thu Dec 28 19:37:32 2023
+Deleted customer with id 16 at Thu Dec 28 19:37:37 2023
+Deleted customer with id 12 at Thu Dec 28 19:37:47 2023
+Login at Thu Dec 28 20:14:33 2023
+Login at Thu Dec 28 20:16:16 2023
+Modified customer with id 1 at Thu Dec 28 20:16:52 2023
+Login at Thu Dec 28 20:18:14 2023
+Modified customer with id 13 at Thu Dec 28 20:18:34 2023
+Login at Thu Dec 28 20:19:34 2023
+Login at Thu Dec 28 20:19:51 2023
+Modified customer with id 16 at Thu Dec 28 20:20:20 2023
+Login at Thu Dec 28 20:23:02 2023
+Modified customer with id 13 at Thu Dec 28 20:23:28 2023
+Login at Thu Dec 28 20:24:40 2023
+Login at Thu Dec 28 20:24:54 2023
+Modified customer with id 12 at Thu Dec 28 20:25:21 2023
+Login at Thu Dec 28 20:30:33 2023
+Login at Thu Dec 28 20:31:19 2023

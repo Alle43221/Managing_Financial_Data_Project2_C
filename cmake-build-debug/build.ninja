@@ -52,14 +52,18 @@ build cmake_object_order_depends_target_Managing_Financial_Data_Project2_C: phon
 build CMakeFiles/Managing_Financial_Data_Project2_C.dir/main.c.obj: C_COMPILER__Managing_Financial_Data_Project2_C_Debug C$:/Users/Ale/CLionProjects/Managing_Financial_Data_Project2_C/main.c || cmake_object_order_depends_target_Managing_Financial_Data_Project2_C
   DEP_FILE = CMakeFiles\Managing_Financial_Data_Project2_C.dir\main.c.obj.d
   FLAGS = -g -std=gnu99
-  INCLUDES = -IC:/Users/Ale/CLionProjects/Managing_Financial_Data_Project2_C/./validation.h
   OBJECT_DIR = CMakeFiles\Managing_Financial_Data_Project2_C.dir
   OBJECT_FILE_DIR = CMakeFiles\Managing_Financial_Data_Project2_C.dir
 
 build CMakeFiles/Managing_Financial_Data_Project2_C.dir/validation.c.obj: C_COMPILER__Managing_Financial_Data_Project2_C_Debug C$:/Users/Ale/CLionProjects/Managing_Financial_Data_Project2_C/validation.c || cmake_object_order_depends_target_Managing_Financial_Data_Project2_C
   DEP_FILE = CMakeFiles\Managing_Financial_Data_Project2_C.dir\validation.c.obj.d
   FLAGS = -g -std=gnu99
-  INCLUDES = -IC:/Users/Ale/CLionProjects/Managing_Financial_Data_Project2_C/./validation.h
+  OBJECT_DIR = CMakeFiles\Managing_Financial_Data_Project2_C.dir
+  OBJECT_FILE_DIR = CMakeFiles\Managing_Financial_Data_Project2_C.dir
+
+build CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_customers.c.obj: C_COMPILER__Managing_Financial_Data_Project2_C_Debug C$:/Users/Ale/CLionProjects/Managing_Financial_Data_Project2_C/dynamic_customers.c || cmake_object_order_depends_target_Managing_Financial_Data_Project2_C
+  DEP_FILE = CMakeFiles\Managing_Financial_Data_Project2_C.dir\dynamic_customers.c.obj.d
+  FLAGS = -g -std=gnu99
   OBJECT_DIR = CMakeFiles\Managing_Financial_Data_Project2_C.dir
   OBJECT_FILE_DIR = CMakeFiles\Managing_Financial_Data_Project2_C.dir
 
@@ -71,7 +75,7 @@ build CMakeFiles/Managing_Financial_Data_Project2_C.dir/validation.c.obj: C_COMP
 #############################################
 # Link the executable Managing_Financial_Data_Project2_C.exe
 
-build Managing_Financial_Data_Project2_C.exe: C_EXECUTABLE_LINKER__Managing_Financial_Data_Project2_C_Debug CMakeFiles/Managing_Financial_Data_Project2_C.dir/main.c.obj CMakeFiles/Managing_Financial_Data_Project2_C.dir/validation.c.obj
+build Managing_Financial_Data_Project2_C.exe: C_EXECUTABLE_LINKER__Managing_Financial_Data_Project2_C_Debug CMakeFiles/Managing_Financial_Data_Project2_C.dir/main.c.obj CMakeFiles/Managing_Financial_Data_Project2_C.dir/validation.c.obj CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_customers.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Managing_Financial_Data_Project2_C.dir

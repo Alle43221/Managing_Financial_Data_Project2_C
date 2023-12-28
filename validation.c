@@ -3,17 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 
-int check_id_customer(struct Node_customer* head, char new_id[]){
-    struct Node_customer* iterator=head;
-    while(iterator!=NULL){
-        if(strcmp(iterator->data.id_string,new_id)==0){
-            return 0;
-        }
-        iterator=iterator->next;
-    }
-    return 1;
-}
-
 int validare_string(char x[]){
     /**
     * param: char[]
@@ -85,7 +74,7 @@ int validare_phone(char x[]) {
     return 1;
 }
 
-int validare_id_customer(char x[], struct Node_customer* head) {
+int validare_id_customer(char x[]) {
     /**
     * param: char[]
     * description: validates an id
@@ -99,7 +88,7 @@ int validare_id_customer(char x[], struct Node_customer* head) {
         if(!isdigit(x[i]))
             return 0;
     }
-    return check_id_customer(head, x);
+    return 1;
 }
 
 int validare_email(char x[]) {
