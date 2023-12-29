@@ -1,9 +1,11 @@
-#include "dynamic_customers.h"
+#include "dynamic_accounts.h"
 
-int check_id_customer(struct Node_customer* head, char new_id[]){
-    struct Node_customer* iterator=head;
+int check_id_account(struct Node_account* head, char new_id[]){
+    struct Node_account* iterator=head;
+    char *p;
     while(iterator!=NULL){
-        if(strcmp(iterator->data.id_string,new_id)==0){
+        strncpy(p, iterator->data.iban+2, 2);
+        if(strcmp(p,new_id)==0){
             return 0;
         }
         iterator=iterator->next;
@@ -17,10 +19,7 @@ void insert_at_end_customer(struct Node_customer* head, char name[], char iban[]
         struct Node_customer* new_node= (struct Node_customer*) malloc(sizeof(struct Node_customer));
         new_node->next=NULL;
         strcpy(new_node->data.id_string, id);
-        strcpy(new_node->data.phone, phone);
         strcpy(new_node->data.iban, iban);
-        strcpy(new_node->data.name, name);
-        strcpy(new_node->data.email, email);
         head=new_node;
     }
     else
@@ -31,25 +30,8 @@ void insert_at_end_customer(struct Node_customer* head, char name[], char iban[]
         struct Node_customer* new_node= (struct Node_customer*) malloc(sizeof(struct Node_customer));
         new_node->next=NULL;
         strcpy(new_node->data.id_string, id);
-        strcpy(new_node->data.phone, phone);
         strcpy(new_node->data.iban, iban);
-        strcpy(new_node->data.name, name);
-        strcpy(new_node->data.email, email);
         iterator->next=new_node;
-    }
-}
-
-void modify_by_id_customer(struct Node_customer* head, char id[], char name[], char iban[], char phone[], char email[]){
-    struct Node_customer* iterator=head;
-    while(iterator!=NULL){
-        if(strcmp(iterator->data.id_string,id)==0){
-            strcpy(iterator->data.phone, phone);
-            strcpy(iterator->data.iban, iban);
-            strcpy(iterator->data.name, name);
-            strcpy(iterator->data.email, email);
-            return;
-        }
-        iterator=iterator->next;
     }
 }
 

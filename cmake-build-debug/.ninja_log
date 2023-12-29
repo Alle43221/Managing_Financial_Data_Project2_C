@@ -1,6 +1,8 @@
 # ninja log v5
-11	243	7254914630329830	CMakeFiles/Managing_Financial_Data_Project2_C.dir/main.c.obj	53639d64520241d0
-244	437	7254914632227735	Managing_Financial_Data_Project2_C.exe	1d6f73d1fabbefb9
-2	290	7254914674208749	build.ninja	f110d3f6eec77357
-4	182	7254914629728397	CMakeFiles/Managing_Financial_Data_Project2_C.dir/validation.c.obj	1fdb3930bf2b4541
-19	173	7254914629638206	CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_customers.c.obj	bb8fa4ea61008e53
+2	65	7255494986464431	CMakeFiles/Managing_Financial_Data_Project2_C.dir/main.c.obj	53639d64520241d0
+68	147	7255494987264526	Managing_Financial_Data_Project2_C.exe	f42c369568716bdc
+2	290	7255512572834068	build.ninja	f110d3f6eec77357
+6	76	7255506012031823	CMakeFiles/Managing_Financial_Data_Project2_C.dir/validation.c.obj	1fdb3930bf2b4541
+2	65	7255492668419696	CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_customers.c.obj	bb8fa4ea61008e53
+5	68	7255494986484438	CMakeFiles/Managing_Financial_Data_Project2_C.dir/customers_crud.c.obj	5f958e09e87c4c92
+17	64	7255506011901860	CMakeFiles/Managing_Financial_Data_Project2_C.dir/custom_objects.c.obj	f0ac5435893be2ca

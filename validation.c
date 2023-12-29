@@ -74,7 +74,7 @@ int validare_phone(char x[]) {
     return 1;
 }
 
-int validare_id_customer(char x[]) {
+int validare_id(char x[]) {
     /**
     * param: char[]
     * description: validates an id

@@ -2,65 +2,9 @@
 #include <string.h>
 #include "time.h"
 #include <ctype.h>
-#include "stdlib.h"
-#include "validation.h"
-#include "dynamic_customers.h"
+#include "customers_crud.h"
 
-char global_user[50]="";
-
-struct Node_customer* customers_head=NULL;
-
-void insert_at_end_customer(struct Node_customer* head, char name[], char iban[], char phone[], char id[], char email[]){
-    struct Node_customer* iterator=head;
-    if(iterator==NULL){  //cazul in care este primul nod
-        struct Node_customer* new_node= (struct Node_customer*) malloc(sizeof(struct Node_customer));
-        new_node->next=NULL;
-        strcpy(new_node->data.id_string, id);
-        strcpy(new_node->data.phone, phone);
-        strcpy(new_node->data.iban, iban);
-        strcpy(new_node->data.name, name);
-        strcpy(new_node->data.email, email);
-        customers_head=new_node;
-    }
-    else
-    {
-        while(iterator->next!=NULL){
-            iterator=iterator->next;
-        }
-        struct Node_customer* new_node= (struct Node_customer*) malloc(sizeof(struct Node_customer));
-        new_node->next=NULL;
-        strcpy(new_node->data.id_string, id);
-        strcpy(new_node->data.phone, phone);
-        strcpy(new_node->data.iban, iban);
-        strcpy(new_node->data.name, name);
-        strcpy(new_node->data.email, email);
-        iterator->next=new_node;
-    }
-
-}
-
-int delete_by_id_customer(struct Node_customer* head, char id[]){
-    struct Node_customer* iterator=head;
-    if(strcmp(iterator->data.id_string, id)==0){
-        customers_head=iterator->next;
-        free(iterator);
-        return 1;
-    }
-    while(iterator->next!=NULL){
-        if(strcmp(iterator->next->data.id_string, id)==0){
-            struct Node_customer* copy=iterator->next;
-            iterator->next=iterator->next->next;
-            free(copy);
-            return 1;
-        }
-        else{
-            iterator=iterator->next;
-        }
-    }
-    return 0;
-}
-
-void login_menu()
+void login_menu(char global_user[])
 {
     /**
      * param: none
@@ -134,6 +78,9 @@ void menu_text(){
     printf("| 1. Add customer                           |\n");
     printf("| 2. Delete customer                        |\n");
     printf("| 3. Modify customer                        |\n");
+    printf("| 4. Create account                         |\n");
+    printf("| 5. Delete account                         |\n");
+    printf("| 6.                                        |\n");
     printf("---------------------------------------------\n");
 }
 
@@ -145,176 +92,30 @@ void print_all(struct Node_customer *head) {
     }
 }
 
-void save_customers_to_file(struct Node_customer *head){
-    char path[100];
-    sprintf(path, "./%s/customers.txt",global_user);
-    FILE *file1=fopen(path, "w");
-    struct Node_customer* iterator=head;
-    while(iterator!=NULL){
-        char str[100];
-        sprintf(str, "%s,%s,%s,%s,%s\n",iterator->data.id_string,iterator->data.name, iterator->data.iban, iterator->data.phone, iterator->data.email);
-        fwrite(str, 1, strlen(str), file1);
-        iterator=iterator->next;
-    }
-    fclose(file1);
-}
-
-void delete_customer(){
-    int id1=0;
-    char id_string[10]="";
-    while (id1==0){
-        printf("Enter customer id:\n");
-        scanf("%10s", id_string);
-        id1= validare_id_customer(id_string);
-        if(id1!=1){
-            printf("Invalid id!\n");
-        }
-    }
-
-    int rez=delete_by_id_customer(customers_head, id_string);
-    if(rez){
-        printf("Customer deleted with success!\n");
-        char path[100];
-        sprintf(path, "./%s/log.txt",global_user);
-
-        FILE *file1=fopen(path, "a");
-        time_t t;
-        time(&t);
-        char str[100];
-        sprintf(str, "Deleted customer with id %s at %s",id_string,ctime(&t));
-        fwrite(str, 1, strlen(str), file1);
-
-        save_customers_to_file(customers_head);
-        fclose(file1);
-    }
-    else
-        printf("Customer not found!\n");
-}
-
-void modify_customer(){
-    char name[50]="", iban[25]="", phone[11]="", id_string[10]="", email[50]="";
-    int name1=0, iban1=0, phone1=0, id1=0, email1=0;
-
-    while (name1==0){
-        printf("Enter customer name:\n");
-        scanf("%50s", name);
-        name1=validare_string(name);
-        if(name1==0){
-            printf("Invalid name!\n");
-        }
-    }
-
-    while (iban1==0){
-        printf("Enter customer iban:\n");
-        scanf("%25s", iban);
-        iban1= validare_iban(iban);
-        if(iban1==0){
-            printf("Invalid iban!\n");
-        }
-    }
-
-    while (phone1==0){
-        printf("Enter customer phone number:\n");
-        scanf("%11s", phone);
-        phone1= validare_phone(phone);
-        if(phone1==0){
-            printf("Invalid phone number!\n");
-        }
-    }
-
-    while (email1==0){
-        printf("Enter customer email address:\n");
-        scanf("%50s", email);
-        email1= validare_email(email);
-        if(email1==0){
-            printf("Invalid email address!\n");
-        }
-    }
+void add_account(struct Node_customer *head, char global_user[]) {
+    char id_string[10]="", type[2]="";
+    int type1=0, id1=0;
 
     while (id1==0){
-        printf("Enter customer id:\n");
+        printf("Enter account id:\n");
         scanf("%10s", id_string);
-        id1= validare_id_customer(id_string);
-        if(id1!=1){
-            printf("Invalid id!\n");
-        }
-    }
-    print_all(customers_head);
-    if(check_id_customer(customers_head, id_string)==1){
-        printf("Customer not found!\n");
-    }
-    else{
-        modify_by_id_customer(customers_head, id_string, name, iban, phone, email);
-
-        printf("Customer modified with success!\n");
-        char path[100];
-        sprintf(path, "./%s/log.txt",global_user);
-
-        FILE *file1=fopen(path, "a");
-        time_t t;
-        time(&t);
-        char str[100];
-        sprintf(str, "Modified customer with id %s at %s",id_string,ctime(&t));
-        fwrite(str, 1, strlen(str), file1);
-
-        save_customers_to_file(customers_head);
-        fclose(file1);
-    }
-
-
-}
-
-void add_customer(){
-    char name[50]="", iban[25]="", phone[11]="", id_string[10]="", email[50]="";
-    int name1=0, iban1=0, phone1=0, id1=0, email1=0;
-
-    while (name1==0){
-        printf("Enter customer name:\n");
-        scanf("%50s", name);
-        name1=validare_string(name);
-        if(name1==0){
-            printf("Invalid name!\n");
-        }
-    }
-
-    while (iban1==0){
-        printf("Enter customer iban:\n");
-        scanf("%25s", iban);
-        iban1= validare_iban(iban);
-        if(iban1==0){
-            printf("Invalid iban!\n");
-        }
-    }
-
-    while (phone1==0){
-        printf("Enter customer phone number:\n");
-        scanf("%11s", phone);
-        phone1= validare_phone(phone);
-        if(phone1==0){
-            printf("Invalid phone number!\n");
-        }
-    }
-
-    while (email1==0){
-        printf("Enter customer email address:\n");
-        scanf("%50s", email);
-        email1= validare_email(email);
-        if(email1==0){
-            printf("Invalid email address!\n");
-        }
-    }
-
-    while (id1==0){
-        printf("Enter customer id:\n");
-        scanf("%10s", id_string);
-        id1= validare_id_customer(id_string);
-        id1+= check_id_customer(customers_head, id_string);
+        id1= validare_id(id_string);
+        //check_id_account
+        id1+= check_id_customer(head, id_string);
         if(id1!=2){
             printf("Invalid/Existing id!\n");
         }
     }
 
-    insert_at_end_customer(customers_head, name, iban, phone, id_string, email);
+    while (type1==0){
+        printf("Enter account type: savings/checking/credit [1/2/3]\n");
+        scanf("%10s", id_string);
+        id1= validare_id(id_string);
+        id1+= check_id_customer(head, id_string);
+        if(id1!=2){
+            printf("Invalid/Existing id!\n");
+        }
+    }
 
     char path[100];
     sprintf(path, "./%s/log.txt",global_user);
@@ -329,26 +130,10 @@ void add_customer(){
 
     sprintf(path, "./%s/customers.txt",global_user);
     FILE *file=fopen(path, "a");
-    sprintf(str, "%s,%s,%s,%s,%s\n",id_string,name, iban, phone, email);
+    sprintf(str, "%s,%s,%s,%s,%s\n",id_string,);
     fwrite(str, 1, strlen(str), file);
     fclose(file);
     printf("Customer added with success!\n");
-}
-
-void load_customers(){
-    char path[100], str[100];
-    sprintf(path, "./%s/customers.txt",global_user);
-    FILE *file=fopen(path, "r");
-    while(fgets(str, 100, file)){
-        char *id= strtok(str, ",\n");
-        char *name=strtok(NULL, ",\n");
-        char *iban=strtok(NULL, ",\n");
-        char *phone=strtok(NULL, ",\n");
-        char *email=strtok(NULL, ",\n");
-        insert_at_end_customer(customers_head, name, iban, phone, id, email);
-    }
-
-    fclose(file);
 }
 
 int main(){
@@ -358,23 +143,34 @@ int main(){
      * exception: ends the program on input "exit"
      */
 
+    char global_user[50]="";
+    struct Node_customer* customers_head=NULL;
     char menu_choice[100];
     welcome_text();
     while(strlen(global_user)==0){
-        login_menu();
+        login_menu(global_user);
     }
-    load_customers(customers_head);
+    load_customers(customers_head, global_user);
     menu_text();
     while(strcmp(menu_choice, "exit")!=0){
         scanf("%100s", menu_choice);
         if(strcmp(menu_choice,"1")==0){
-            add_customer();
+            add_customer(customers_head, global_user);
         }
         else if(strcmp(menu_choice,"2")==0){
-            delete_customer();
+            delete_customer(customers_head, global_user);
         }
         else if(strcmp(menu_choice,"3")==0){
-            modify_customer();
+            modify_customer(customers_head, global_user);
+        }
+        else if(strcmp(menu_choice,"4")==0){
+            add_account(customers_head, global_user);
+        }
+        else if(strcmp(menu_choice,"5")==0){
+
+        }
+        else if(strcmp(menu_choice,"6")==0){
+
         }
         else if(strcmp(menu_choice,"exit")==0){
             return 0;
