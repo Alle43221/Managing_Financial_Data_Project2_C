@@ -87,6 +87,17 @@ void menu_text(){
     printf("| 6. Delete account                         |\n");
     printf("| 7. Print all accounts                     |\n");
     printf("---------------------------------------------\n");
+    printf("| 8. Save transfer                          |\n");
+    printf("---------------------------------------------\n");
+}
+
+void save_transfer(){
+    printf("Enter the source account iban:\n");
+    //while(validate_iban)
+    printf("Enter the destination account iban:\n");
+    //while(validate_iban)
+    //check permission for transfer
+
 }
 
 int main(){
@@ -130,6 +141,9 @@ int main(){
         }
         else if(strcmp(menu_choice,"7")==0){
             print_all_accounts(accounts_head);
+        }
+        else if(strcmp(menu_choice,"7")==0){
+            save_transfer();
         }
         else if(strcmp(menu_choice,"exit")==0){
             return 0;

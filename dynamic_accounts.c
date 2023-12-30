@@ -2,7 +2,7 @@
 
 int check_id_account(struct Node_account* head, char new_id[]){
     struct Node_account* iterator=head;
-    char *p;
+    char p[3];
     while(iterator!=NULL){
         strncpy(p, iterator->data.iban+2, 2);
         if(strcmp(p,new_id)==0){
@@ -42,7 +42,7 @@ struct Node_account* insert_at_end_account(struct Node_account* head, char type[
 
 struct Node_account* delete_by_id_account(struct Node_account* head, char id[]){
     struct Node_account* iterator=head;
-    char *p;
+    char p[3];
     strncpy(p, iterator->data.iban+2, 2);
     if(strcmp(p,id)==0){
         head=iterator->next;

@@ -5,13 +5,13 @@ struct Node_account* add_account(struct Node_account *head, char global_user[], 
     int type1=0, id1=0;
 
     while (id1==0){
-        id1=0;
         printf("Enter account id:\n");
         scanf("%10s", id_string);
         id1= validare_id(id_string);
         id1+= check_id_account(head, id_string);
         if(id1<2){
             printf("Invalid/Existing id!\n");
+            id1=0;
         }
     }
 
@@ -82,7 +82,7 @@ void save_accounts_to_file(struct Node_account *head, char global_user[]){
     struct Node_account* iterator=head;
     while(iterator!=NULL){
         char str[100];
-        printf("%s,%s,%f\n", iterator->data.iban, &iterator->data.type, iterator->data.balance);
+        sprintf(str, "%s,%s,%f\n", iterator->data.iban, &iterator->data.type, iterator->data.balance);
         fwrite(str, 1, strlen(str), file1);
         iterator=iterator->next;
     }
