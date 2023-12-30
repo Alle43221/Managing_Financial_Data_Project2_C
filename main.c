@@ -3,6 +3,7 @@
 #include "time.h"
 #include <ctype.h>
 #include "customers_crud.h"
+#include "accounts_crud.h"
 
 void login_menu(char global_user[], char user_id[])
 {
@@ -76,21 +77,16 @@ void menu_text(){
     */
     printf("---------------------------------------------\n");
     printf("| Menu:                                     |\n");
+    printf("---------------------------------------------\n");
     printf("| 1. Add customer                           |\n");
     printf("| 2. Delete customer                        |\n");
     printf("| 3. Modify customer                        |\n");
-    printf("| 4. Create account                         |\n");
-    printf("| 5. Delete account                         |\n");
-    printf("| 6.                                        |\n");
+    printf("| 4. Print all customers                    |\n");
     printf("---------------------------------------------\n");
-}
-
-void print_all(struct Node_customer *head) {
-    struct Node_customer* iterator=head;
-    while(iterator!=NULL){
-        printf("%s\n", iterator->data.name);
-        iterator=iterator->next;
-    }
+    printf("| 5. Create account                         |\n");
+    printf("| 6. Delete account                         |\n");
+    printf("| 7. Print all accounts                     |\n");
+    printf("---------------------------------------------\n");
 }
 
 int main(){
@@ -109,27 +105,31 @@ int main(){
     while(strlen(global_user)==0){
         login_menu(global_user, user_id);
     }
-    load_customers(customers_head, global_user);
+    customers_head=load_customers(customers_head, global_user);
+    accounts_head=load_accounts(accounts_head, global_user);
     menu_text();
     while(strcmp(menu_choice, "exit")!=0){
         scanf("%100s", menu_choice);
         if(strcmp(menu_choice,"1")==0){
-            add_customer(customers_head, global_user);
+            customers_head=add_customer(customers_head, global_user);
         }
         else if(strcmp(menu_choice,"2")==0){
-            delete_customer(customers_head, global_user);
+            customers_head=delete_customer(customers_head, global_user);
         }
         else if(strcmp(menu_choice,"3")==0){
             modify_customer(customers_head, global_user);
         }
         else if(strcmp(menu_choice,"4")==0){
-            add_account(customers_head, global_user);
+            print_all_customers(customers_head);
         }
         else if(strcmp(menu_choice,"5")==0){
-
+            accounts_head=add_account(accounts_head, global_user, user_id);
         }
         else if(strcmp(menu_choice,"6")==0){
-
+            accounts_head=delete_account(accounts_head, global_user);
+        }
+        else if(strcmp(menu_choice,"7")==0){
+            print_all_accounts(accounts_head);
         }
         else if(strcmp(menu_choice,"exit")==0){
             return 0;

@@ -11,7 +11,7 @@ int check_id_customer(struct Node_customer* head, char new_id[]){
     return 1;
 }
 
-void insert_at_end_customer(struct Node_customer* head, char name[], char iban[], char phone[], char id[], char email[]){
+struct Node_customer* insert_at_end_customer(struct Node_customer* head, char name[], char iban[], char phone[], char id[], char email[]){
     struct Node_customer* iterator=head;
     if(iterator==NULL){  //cazul in care este primul nod
         struct Node_customer* new_node= (struct Node_customer*) malloc(sizeof(struct Node_customer));
@@ -21,7 +21,7 @@ void insert_at_end_customer(struct Node_customer* head, char name[], char iban[]
         strcpy(new_node->data.iban, iban);
         strcpy(new_node->data.name, name);
         strcpy(new_node->data.email, email);
-        head=new_node;
+        return new_node;
     }
     else
     {
@@ -36,6 +36,7 @@ void insert_at_end_customer(struct Node_customer* head, char name[], char iban[]
         strcpy(new_node->data.name, name);
         strcpy(new_node->data.email, email);
         iterator->next=new_node;
+        return head;
     }
 }
 
@@ -53,23 +54,23 @@ void modify_by_id_customer(struct Node_customer* head, char id[], char name[], c
     }
 }
 
-int delete_by_id_customer(struct Node_customer* head, char id[]){
+struct Node_customer* delete_by_id_customer(struct Node_customer* head, char id[]){
     struct Node_customer* iterator=head;
     if(strcmp(iterator->data.id_string, id)==0){
         head=iterator->next;
         free(iterator);
-        return 1;
+        return head;
     }
     while(iterator->next!=NULL){
         if(strcmp(iterator->next->data.id_string, id)==0){
             struct Node_customer* copy=iterator->next;
             iterator->next=iterator->next->next;
             free(copy);
-            return 1;
+            return head;
         }
         else{
             iterator=iterator->next;
         }
     }
-    return 0;
+    return head;
 }

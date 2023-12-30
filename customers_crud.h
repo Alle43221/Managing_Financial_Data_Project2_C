@@ -9,8 +9,9 @@
 #include "time.h"
 
 void save_customers_to_file(struct Node_customer *head, char global_user[]);
-void delete_customer(struct Node_customer *head, char global_user[]);
+struct Node_customer* delete_customer(struct Node_customer *head, char global_user[]);
 void modify_customer(struct Node_customer *head, char global_user[]);
-void add_customer(struct Node_customer *head, char global_user[]);
-void load_customers(struct Node_customer *head, char global_user[]);
+struct Node_customer* add_customer(struct Node_customer *head, char global_user[]);
+struct Node_customer* load_customers(struct Node_customer *head, char global_user[]);
+void print_all_customers(struct Node_customer *head);
 #endif

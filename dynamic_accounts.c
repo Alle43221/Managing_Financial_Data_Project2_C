@@ -6,6 +6,8 @@ int check_id_account(struct Node_account* head, char new_id[]){
     while(iterator!=NULL){
         strncpy(p, iterator->data.iban+2, 2);
         if(strcmp(p,new_id)==0){
+            if(iterator->data.balance!=0.0f)
+                return -1;
             return 0;
         }
         iterator=iterator->next;
@@ -13,18 +15,13 @@ int check_id_account(struct Node_account* head, char new_id[]){
     return 1;
 }
 
-void insert_at_end_account(struct Node_account* head, char type[], char id[], char cod_client[]){
+struct Node_account* insert_at_end_account(struct Node_account* head, char type[], char iban[], float value){
     struct Node_account* iterator=head;
     if(iterator==NULL){  //cazul in care este primul nod
         struct Node_account* new_node= (struct Node_account*) malloc(sizeof(struct Node_account));
         new_node->next=NULL;
         strcpy(&new_node->data.type, type);
-        new_node->data.balance=0;
-        char iban[25];
-        strcpy(iban, "RO");
-        strcpy(iban+2, id);
-        strcpy(iban+4, "ALMO");
-        strcpy(iban+8, cod_client);
+        new_node->data.balance=value;
         strcpy(new_node->data.iban, iban);
         head=new_node;
     }
@@ -37,24 +34,20 @@ void insert_at_end_account(struct Node_account* head, char type[], char id[], ch
         new_node->next=NULL;
         strcpy(&new_node->data.type, type);
         new_node->data.balance=0;
-        char iban[25];
-        strcpy(iban, "RO");
-        strcpy(iban+2, id);
-        strcpy(iban+4, "ALMO");
-        strcpy(iban+8, cod_client);
         strcpy(new_node->data.iban, iban);
         iterator->next=new_node;
     }
+    return head;
 }
 
-int delete_by_id_account(struct Node_account* head, char id[]){
+struct Node_account* delete_by_id_account(struct Node_account* head, char id[]){
     struct Node_account* iterator=head;
     char *p;
     strncpy(p, iterator->data.iban+2, 2);
     if(strcmp(p,id)==0){
         head=iterator->next;
         free(iterator);
-        return 1;
+        return head;
     }
     while(iterator->next!=NULL){
         strncpy(p, iterator->data.iban+2, 2);
@@ -62,11 +55,11 @@ int delete_by_id_account(struct Node_account* head, char id[]){
             struct Node_account* copy=iterator->next;
             iterator->next=iterator->next->next;
             free(copy);
-            return 1;
+            return head;
         }
         else{
             iterator=iterator->next;
         }
     }
-    return 0;
+    return head;
 }
