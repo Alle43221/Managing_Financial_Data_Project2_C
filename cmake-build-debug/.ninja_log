@@ -1,8 +1,9 @@
 # ninja log v5
 2	65	7255494986464431	CMakeFiles/Managing_Financial_Data_Project2_C.dir/main.c.obj	53639d64520241d0
+14	209	7256360631388411	CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_accounts.c.obj	1c21b365b0785313
 68	147	7255494987264526	Managing_Financial_Data_Project2_C.exe	f42c369568716bdc
-2	290	7255512572834068	build.ninja	f110d3f6eec77357
+2	290	7256365613108628	build.ninja	f110d3f6eec77357
 6	76	7255506012031823	CMakeFiles/Managing_Financial_Data_Project2_C.dir/validation.c.obj	1fdb3930bf2b4541
-2	65	7255492668419696	CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_customers.c.obj	bb8fa4ea61008e53
-5	68	7255494986484438	CMakeFiles/Managing_Financial_Data_Project2_C.dir/customers_crud.c.obj	5f958e09e87c4c92
-17	64	7255506011901860	CMakeFiles/Managing_Financial_Data_Project2_C.dir/custom_objects.c.obj	f0ac5435893be2ca
+7	210	7256360631408411	CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_customers.c.obj	bb8fa4ea61008e53
+11	220	7256360631509135	CMakeFiles/Managing_Financial_Data_Project2_C.dir/customers_crud.c.obj	5f958e09e87c4c92
+19	190	7256360631208400	CMakeFiles/Managing_Financial_Data_Project2_C.dir/custom_objects.c.obj	f0ac5435893be2ca

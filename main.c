@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include "customers_crud.h"
 
-void login_menu(char global_user[])
+void login_menu(char global_user[], char user_id[])
 {
     /**
      * param: none
@@ -23,6 +23,7 @@ void login_menu(char global_user[])
     while(fgets(buffer, 100, file)){
         strcpy(username1, strtok(buffer, " \n"));
         strcpy(password1, strtok(NULL, " \n"));
+        strcpy(user_id, strtok(NULL, " \n"));
         if(strcmp(username, username1)==0){
             if(strcmp(password, password1)==0){
                 printf("Login successfully!\n");
@@ -92,50 +93,6 @@ void print_all(struct Node_customer *head) {
     }
 }
 
-void add_account(struct Node_customer *head, char global_user[]) {
-    char id_string[10]="", type[2]="";
-    int type1=0, id1=0;
-
-    while (id1==0){
-        printf("Enter account id:\n");
-        scanf("%10s", id_string);
-        id1= validare_id(id_string);
-        //check_id_account
-        id1+= check_id_customer(head, id_string);
-        if(id1!=2){
-            printf("Invalid/Existing id!\n");
-        }
-    }
-
-    while (type1==0){
-        printf("Enter account type: savings/checking/credit [1/2/3]\n");
-        scanf("%10s", id_string);
-        id1= validare_id(id_string);
-        id1+= check_id_customer(head, id_string);
-        if(id1!=2){
-            printf("Invalid/Existing id!\n");
-        }
-    }
-
-    char path[100];
-    sprintf(path, "./%s/log.txt",global_user);
-
-    FILE *file1=fopen(path, "a");
-    time_t t;
-    time(&t);
-    char str[100];
-    sprintf(str, "Added customer with id %s at %s",id_string,ctime(&t));
-    fwrite(str, 1, strlen(str), file1);
-    fclose(file1);
-
-    sprintf(path, "./%s/customers.txt",global_user);
-    FILE *file=fopen(path, "a");
-    sprintf(str, "%s,%s,%s,%s,%s\n",id_string,);
-    fwrite(str, 1, strlen(str), file);
-    fclose(file);
-    printf("Customer added with success!\n");
-}
-
 int main(){
     /**
      * param: none
@@ -144,11 +101,13 @@ int main(){
      */
 
     char global_user[50]="";
+    char user_id[15]="";
     struct Node_customer* customers_head=NULL;
+    struct Node_account* accounts_head=NULL;
     char menu_choice[100];
     welcome_text();
     while(strlen(global_user)==0){
-        login_menu(global_user);
+        login_menu(global_user, user_id);
     }
     load_customers(customers_head, global_user);
     menu_text();

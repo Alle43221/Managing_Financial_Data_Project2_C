@@ -14,7 +14,7 @@ struct Node_customer{
 };
 
 struct account{
-    int type;
+    char type;
     float balance;
     char iban[25];
 };
