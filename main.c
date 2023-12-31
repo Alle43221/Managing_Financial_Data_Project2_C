@@ -89,6 +89,7 @@ void menu_text(){
     printf("| 7. Print all accounts                     |\n");
     printf("---------------------------------------------\n");
     printf("| 8. Save deposit                           |\n");
+    printf("| 9. Save withdrawal                        |\n");
     printf("---------------------------------------------\n");
 }
 
@@ -193,6 +194,80 @@ void save_deposit(struct Node_account* head, char global_user[]){
     printf("Successful deposit!\n");
 }
 
+void save_withdrawal(struct Node_account *head, char global_user[50]) {
+    char value_string[10], iban[25];
+    float value;
+    int iban1=0, value1=0;
+    while(iban1==0){
+        printf("Enter the account iban:\n");
+        scanf("%25s", iban);
+        iban1+=validare_iban(iban);
+        if(iban1==0){
+            printf("Invalid iban!\n");
+        }
+    }
+
+    while(value1==0){
+        printf("Enter the amount:\n");
+        scanf("%10s", value_string);
+        value1+= validate_amount(value_string);
+        if(value1==0){
+            printf("Invalid value!\n");
+        }
+    }
+    value=atof(value_string);
+    value=value*100;
+    value=roundf(value);
+    value/=100;
+
+    char cod_banca[5], cod_tara[3];
+    strncpy(cod_banca, iban+4, 4);
+    strncpy(cod_tara, iban, 2);
+    cod_tara[2]='\0';
+    if(strcmp(cod_banca, "ALMO")==0 && strcmp(cod_tara, "RO")==0){
+        char cod_client[17], cod_cont[3];
+        strncpy(cod_client, iban+8, 17);
+        strncpy(cod_cont, iban+2, 2);
+
+        char username[50], password[50], buffer[100], user_id[17];
+        FILE *file=fopen("users.txt", "r");
+        int gasit=0;
+        while(fgets(buffer, 100, file)) {
+            strcpy(username, strtok(buffer, " \n"));
+            strcpy(password, strtok(NULL, " \n"));
+            strcpy(user_id, strtok(NULL, " \n"));
+            if (strcmp(user_id, cod_client)==0) {
+                if (strcmp(username, global_user) == 0) {
+                    gasit = 1;
+
+                    char path[100];
+                    sprintf(path, "./%s/log.txt", username);
+                    FILE *file1 = fopen(path, "a");
+                    time_t t;
+                    time(&t);
+                    char str[100];
+                    sprintf(str, "Withdraw %0.2f from account with iban %s at %s", value, iban, ctime(&t));
+                    fwrite(str, 1, strlen(str), file1);
+                    fclose(file1);
+
+                    modify_account_by_id(head, cod_cont, value*(-1.0));
+                    save_accounts_to_file(head, username);
+                    printf("Successful withdrawal!\n");
+                }
+                else
+                {
+                    printf("Permission denied!\n");
+                    gasit=1;
+                }
+            }
+        }
+        fclose(file);
+        if(gasit==0){
+            printf("Invalid iban!\n");
+        }
+    }
+}
+
 int main(){
     /**
      * param: none
@@ -237,6 +312,9 @@ int main(){
         }
         else if(strcmp(menu_choice,"8")==0){
             save_deposit(accounts_head, global_user);
+        }
+        else if(strcmp(menu_choice,"8")==0){
+            save_withdrawal(accounts_head, global_user);
         }
         else if(strcmp(menu_choice,"exit")==0){
             return 0;
