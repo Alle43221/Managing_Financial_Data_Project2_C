@@ -63,3 +63,18 @@ struct Node_account* delete_by_id_account(struct Node_account* head, char id[]){
     }
     return head;
 }
+
+void modify_account_by_id(struct Node_account *head, char id_string[], float value) {
+    struct Node_account* iterator=head;
+    char p[3];
+    while(iterator!=NULL){
+        strncpy(p, iterator->data.iban+2, 2);
+        p[2]='\0';
+        if(strcmp(p,id_string)==0){
+            float nearest = roundf(value * 100) / 100;
+            iterator->data.balance+=nearest;
+            return;
+        }
+        iterator=iterator->next;
+    }
+}

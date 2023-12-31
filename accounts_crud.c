@@ -82,7 +82,7 @@ void save_accounts_to_file(struct Node_account *head, char global_user[]){
     struct Node_account* iterator=head;
     while(iterator!=NULL){
         char str[100];
-        sprintf(str, "%s,%s,%f\n", iterator->data.iban, &iterator->data.type, iterator->data.balance);
+        sprintf(str, "%s,%s,%0.2f\n", iterator->data.iban, &iterator->data.type, iterator->data.balance);
         fwrite(str, 1, strlen(str), file1);
         iterator=iterator->next;
     }

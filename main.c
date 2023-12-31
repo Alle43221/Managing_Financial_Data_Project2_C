@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "customers_crud.h"
 #include "accounts_crud.h"
+#include "math.h"
 
 void login_menu(char global_user[], char user_id[])
 {
@@ -87,17 +88,109 @@ void menu_text(){
     printf("| 6. Delete account                         |\n");
     printf("| 7. Print all accounts                     |\n");
     printf("---------------------------------------------\n");
-    printf("| 8. Save transfer                          |\n");
+    printf("| 8. Save deposit                           |\n");
     printf("---------------------------------------------\n");
 }
 
-void save_transfer(){
-    printf("Enter the source account iban:\n");
-    //while(validate_iban)
-    printf("Enter the destination account iban:\n");
-    //while(validate_iban)
-    //check permission for transfer
+int validate_amount(char s[]){
+    /**
+    * param: char[]
+    * return: integer (0/1)
+    * description: checks if the string provided corresponds to a valid amount
+    */
+    int len=strlen(s);
+    for(int i=0; i< len; i++){
+        if(isdigit(s[i])==0 && s[i]!='.')
+            return 0;
+    }
+    double amount=atof(s);
+    if(amount<=0)
+        return 0;
+    if(amount>10000000)
+        return 0;
+    amount*=100.0;
+    float epsilon=0.0000000001;
+    if(abs(amount- (int) amount)>epsilon)
+        return 0;
+    return 1;
+}
 
+void save_deposit(struct Node_account* head, char global_user[]){
+    char value_string[10], iban[25];
+    float value;
+    int iban1=0, value1=0;
+    while(iban1==0){
+        printf("Enter the account iban:\n");
+        scanf("%25s", iban);
+        iban1+=validare_iban(iban);
+        if(iban1==0){
+            printf("Invalid iban!\n");
+        }
+    }
+
+    while(value1==0){
+        printf("Enter the amount:\n");
+        scanf("%10s", value_string);
+        value1+= validate_amount(value_string);
+        if(value1==0){
+            printf("Invalid value!\n");
+        }
+    }
+    value=atof(value_string);
+    value=value*100;
+    value=roundf(value);
+    value/=100;
+
+    char cod_banca[5], cod_tara[3];
+    strncpy(cod_banca, iban+4, 4);
+    strncpy(cod_tara, iban, 2);
+    cod_tara[2]='\0';
+    if(strcmp(cod_banca, "ALMO")==0 && strcmp(cod_tara, "RO")==0){
+        char cod_client[17], cod_cont[3];
+        strncpy(cod_client, iban+8, 17);
+        strncpy(cod_cont, iban+2, 2);
+
+        char username[50], password[50], buffer[100], user_id[17];
+        FILE *file=fopen("users.txt", "r");
+        int gasit=0;
+        while(fgets(buffer, 100, file)) {
+            strcpy(username, strtok(buffer, " \n"));
+            strcpy(password, strtok(NULL, " \n"));
+            strcpy(user_id, strtok(NULL, " \n"));
+            if (strcmp(user_id, cod_client)==0){
+                gasit=1;
+
+                char path[100];
+                sprintf(path, "./%s/log.txt",username);
+                FILE *file1=fopen(path, "a");
+                time_t t;
+                time(&t);
+                char str[100];
+                sprintf(str, "Deposited %0.2f in account with iban %s at %s",value, iban,ctime(&t));
+                fwrite(str, 1, strlen(str), file1);
+                fclose(file1);
+
+                modify_account_by_id(head, cod_cont, value);
+                save_accounts_to_file(head, username);
+            }
+        }
+        if(gasit==0){
+            printf("Invalid iban!\n");
+        }
+        fclose(file);
+    }
+    else{
+        char path[100];
+        sprintf(path, "./%s/log.txt", global_user);
+        FILE *file1=fopen(path, "a");
+        time_t t;
+        time(&t);
+        char str[100];
+        sprintf(str, "Deposited %0.2f in account with iban %s at %s",value, iban,ctime(&t));
+        fwrite(str, 1, strlen(str), file1);
+        fclose(file1);
+    }
+    printf("Successful deposit!\n");
 }
 
 int main(){
@@ -108,7 +201,7 @@ int main(){
      */
 
     char global_user[50]="";
-    char user_id[15]="";
+    char user_id[17]="";
     struct Node_customer* customers_head=NULL;
     struct Node_account* accounts_head=NULL;
     char menu_choice[100];
@@ -142,8 +235,8 @@ int main(){
         else if(strcmp(menu_choice,"7")==0){
             print_all_accounts(accounts_head);
         }
-        else if(strcmp(menu_choice,"7")==0){
-            save_transfer();
+        else if(strcmp(menu_choice,"8")==0){
+            save_deposit(accounts_head, global_user);
         }
         else if(strcmp(menu_choice,"exit")==0){
             return 0;
