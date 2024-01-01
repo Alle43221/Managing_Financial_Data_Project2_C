@@ -61,7 +61,8 @@
 				3,
 				4,
 				5,
-				6
+				6,
+				7
 			]
 		}
 	],
@@ -104,7 +105,8 @@
 				3,
 				4,
 				5,
-				6
+				6,
+				7
 			]
 		}
 	],
@@ -150,6 +152,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "accounts_crud.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "transactions.c",
 			"sourceGroupIndex" : 0
 		}
 	],

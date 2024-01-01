@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include "stdlib.h"
 
 int validare_string(char x[]){
     /**
@@ -103,6 +104,29 @@ int validare_email(char x[]) {
         return 0;
     const char simbol='@';
     if(strchr(x, simbol)==NULL)
+        return 0;
+    return 1;
+}
+
+int validate_amount(char s[]){
+    /**
+    * param: char[]
+    * return: integer (0/1)
+    * description: checks if the string provided corresponds to a valid amount with at most two decimal places
+    */
+    int len=strlen(s);
+    for(int i=0; i< len; i++){
+        if(isdigit(s[i])==0 && s[i]!='.')
+            return 0;
+    }
+    double amount=atof(s);
+    if(amount<=0)
+        return 0;
+    if(amount>10000000)
+        return 0;
+    amount*=100.0;
+    float epsilon=0.0000000001;
+    if(abs(amount- (int) amount)>epsilon)
         return 0;
     return 1;
 }

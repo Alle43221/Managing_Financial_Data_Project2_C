@@ -1,6 +1,13 @@
 #include "dynamic_accounts.h"
 
 int check_id_account(struct Node_account* head, char new_id[]){
+    /**
+    * param: struct Node_accounts*, char[]
+    * description: checks the existence of an object with the given id in the list starting at address head
+    * return: int
+    * exceptions: array contains object with given id -> return 0
+     *            array contains account with balance zero -> return -1
+    */
     struct Node_account* iterator=head;
     char p[3];
     while(iterator!=NULL){
@@ -16,6 +23,12 @@ int check_id_account(struct Node_account* head, char new_id[]){
 }
 
 struct Node_account* insert_at_end_account(struct Node_account* head, char type[], char iban[], float value){
+    /**
+    * param: struct Node_customer*, char[], char[], char[], char[], char[]
+    * description: inserts a new customer with given data at the end of the list starting at address head
+    * return: struct Node_customer* (current address of head)
+    * exceptions: Error allocating memory for new customer -> Memory not allocated! + program end
+    */
     struct Node_account* iterator=head;
     if(iterator==NULL){  //cazul in care este primul nod
         struct Node_account* new_node= (struct Node_account*) malloc(sizeof(struct Node_account));

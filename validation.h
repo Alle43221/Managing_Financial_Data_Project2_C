@@ -12,4 +12,6 @@ int validare_id(char[]);
 
 int validare_email(char[]);
 
+int validate_amount(char s[]);
+
 #endif

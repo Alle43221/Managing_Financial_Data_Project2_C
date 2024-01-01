@@ -1,9 +1,19 @@
 #include "customers_crud.h"
 
 void save_customers_to_file(struct Node_customer *head, char global_user[]){
+    /**
+     * param: struct Node_customer*, char[]
+     * return: void
+     * description: saves all the customers in dynamically allocated list starting at address head to file .../customers.txt
+     * exception: Error opening file at path
+     */
     char path[100];
     sprintf(path, "./%s/customers.txt",global_user);
     FILE *file1=fopen(path, "w");
+    if(file1==NULL){
+        printf("Error opening file at %s\n", path);
+        return;
+    }
     struct Node_customer* iterator=head;
     while(iterator!=NULL){
         char str[100];
@@ -15,6 +25,13 @@ void save_customers_to_file(struct Node_customer *head, char global_user[]){
 }
 
 struct Node_customer * delete_customer(struct Node_customer *head, char global_user[]){
+    /**
+    * param: struct Node_customer*, char[]
+    * return: struct Node_customer* (current starting address for list)
+    * description: deletes a customer identified by id from the list starting at head and from the .../customers.txt file
+    * exception: Error opening file at path
+     *           Customer not found
+    */
     int id1=0;
     char id_string[10]="";
     while (id1==0){
@@ -33,6 +50,10 @@ struct Node_customer * delete_customer(struct Node_customer *head, char global_u
         sprintf(path, "./%s/log.txt",global_user);
 
         FILE *file1=fopen(path, "a");
+        if(file1==NULL){
+            printf("Error opening file at %s\n", path);
+            return head;
+        }
         time_t t;
         time(&t);
         char str[100];
@@ -48,6 +69,13 @@ struct Node_customer * delete_customer(struct Node_customer *head, char global_u
 }
 
 void modify_customer(struct Node_customer *head, char global_user[]){
+    /**
+    * param: struct Node_customer*, char[]
+    * return: void
+    * description: modify a customer identified by id from the list starting at head and into the .../customers.txt file
+    * exception: Error opening file at path
+     *           Customer not found
+    */
     char name[50]="", iban[25]="", phone[11]="", id_string[10]="", email[50]="";
     int name1=0, iban1=0, phone1=0, id1=0, email1=0;
 
@@ -106,6 +134,10 @@ void modify_customer(struct Node_customer *head, char global_user[]){
         sprintf(path, "./%s/log.txt",global_user);
 
         FILE *file1=fopen(path, "a");
+        if(file1==NULL){
+            printf("Error opening file at %s\n", path);
+            return;
+        }
         time_t t;
         time(&t);
         char str[100];
@@ -120,6 +152,12 @@ void modify_customer(struct Node_customer *head, char global_user[]){
 }
 
 struct Node_customer* add_customer(struct Node_customer *head, char global_user[]){
+    /**
+    * param: struct Node_customer*, char[]
+    * return: struct Node_customer* (current address of the start of the list)
+    * description: adds a new customer to the list starting at head and into the .../customers.txt file
+    * exception: Error opening file at path
+    */
     char name[50]="", iban[25]="", phone[11]="", id_string[10]="", email[50]="";
     int name1=0, iban1=0, phone1=0, id1=0, email1=0;
 
@@ -176,6 +214,10 @@ struct Node_customer* add_customer(struct Node_customer *head, char global_user[
     sprintf(path, "./%s/log.txt",global_user);
 
     FILE *file1=fopen(path, "a");
+    if(file1==NULL){
+        printf("Error opening file at %s\n", path);
+        return head;
+    }
     time_t t;
     time(&t);
     char str[100];
@@ -185,6 +227,10 @@ struct Node_customer* add_customer(struct Node_customer *head, char global_user[
 
     sprintf(path, "./%s/customers.txt",global_user);
     FILE *file=fopen(path, "a");
+    if(file==NULL){
+        printf("Error opening file at %s\n", path);
+        return head;
+    }
     sprintf(str, "%s,%s,%s,%s,%s\n",id_string,name, iban, phone, email);
     fwrite(str, 1, strlen(str), file);
     fclose(file);
@@ -193,9 +239,19 @@ struct Node_customer* add_customer(struct Node_customer *head, char global_user[
 }
 
 struct Node_customer* load_customers(struct Node_customer *head, char global_user[]){
+    /**
+     * param: struct Node_customer*, char[]
+     * return: struct Node_customer* (current address of the start of the list)
+     * description: loads all the customers in dynamically allocated list starting at address head from file .../customers.txt
+     * exception: Error opening file at path
+     */
     char path[100], str[100];
     sprintf(path, "./%s/customers.txt",global_user);
     FILE *file=fopen(path, "r");
+    if(file==NULL){
+        printf("Error opening file at %s\n", path);
+        return head;
+    }
     while(fgets(str, 100, file)){
         char *id= strtok(str, ",\n");
         char *name=strtok(NULL, ",\n");
@@ -209,6 +265,12 @@ struct Node_customer* load_customers(struct Node_customer *head, char global_use
 }
 
 void print_all_customers(struct Node_customer *head) {
+    /**
+     * param: struct Node_customer*
+     * return: void
+     * description: prints all the customers from the dynamically allocated list starting at address head
+     * exception: No customers available
+     */
     struct Node_customer* iterator=head;
     if(head==NULL)
         printf("No customers available!\n");
