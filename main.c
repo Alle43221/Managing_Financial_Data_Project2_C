@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include "time.h"
 #include <ctype.h>
 #include "customers_crud.h"
 #include "accounts_crud.h"

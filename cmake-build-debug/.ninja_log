@@ -3,7 +3,7 @@
 4	173	7257417406087405	CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_accounts.c.obj	1c21b365b0785313
 6	224	7258220450523288	CMakeFiles/Managing_Financial_Data_Project2_C.dir/main.c.obj	53639d64520241d0
 199	450	7258221302568833	Managing_Financial_Data_Project2_C.exe	e70fedf5481a0903
-1	184	7258227658984178	build.ninja	f110d3f6eec77357
+1	184	7258388062580936	build.ninja	f110d3f6eec77357
 6	76	7255506012031823	CMakeFiles/Managing_Financial_Data_Project2_C.dir/validation.c.obj	1fdb3930bf2b4541
 25	246	7257374490597327	CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_customers.c.obj	bb8fa4ea61008e53
 5	84	7258190083512170	CMakeFiles/Managing_Financial_Data_Project2_C.dir/customers_crud.c.obj	5f958e09e87c4c92
