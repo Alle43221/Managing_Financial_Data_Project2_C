@@ -87,12 +87,13 @@ void menu_text(){
     printf("| 5. Create account                         |\n");
     printf("| 6. Delete account                         |\n");
     printf("| 7. Print all accounts                     |\n");
+    printf("| 8. Check account balance                  |\n");
     printf("---------------------------------------------\n");
-    printf("| 8. Save deposit                           |\n");
-    printf("| 9. Save withdrawal                        |\n");
-    printf("| 10. Save transaction                      |\n");
+    printf("| 9. Save deposit                           |\n");
+    printf("| 10. Save withdrawal                       |\n");
+    printf("| 11. Save transaction                      |\n");
     printf("---------------------------------------------\n");
-    printf("| 11. Log out                               |\n");
+    printf("| 12. Log out                               |\n");
     printf("---------------------------------------------\n");
 }
 
@@ -439,15 +440,18 @@ int main(){
             print_all_accounts(accounts_head);
         }
         else if(strcmp(menu_choice,"8")==0){
-            save_deposit(accounts_head, global_user);
+            check_account_balance(accounts_head);
         }
         else if(strcmp(menu_choice,"9")==0){
-            save_withdrawal(accounts_head, user_id, global_user);
+            save_deposit(accounts_head, global_user);
         }
         else if(strcmp(menu_choice,"10")==0){
-            save_transfer(accounts_head, user_id, global_user);
+            save_withdrawal(accounts_head, user_id, global_user);
         }
         else if(strcmp(menu_choice,"11")==0){
+            save_transfer(accounts_head, user_id, global_user);
+        }
+        else if(strcmp(menu_choice,"12")==0){
             printf("Successfully logged out!\n");
             strcpy(global_user, "");
             welcome_text();

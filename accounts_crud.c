@@ -127,3 +127,31 @@ struct Node_account * delete_account(struct Node_account *head, char global_user
         printf("Non-empty balance for selected account! Please transfer the sum!\n");
     return head;
 }
+
+void check_account_balance(struct Node_account *head){
+
+    char id_string[10]="";
+    int id1=10;
+
+    while (id1==10){
+        printf("Enter account id:\n");
+        scanf("%10s", id_string);
+        id1= validare_id(id_string);
+        id1+= check_id_account(head, id_string);
+        if(id1==2){
+            printf("Invalid/Non-existing id!\n");
+            id1=10;
+        }
+    }
+    struct Node_account* iterator=head;
+    char p[3];
+    while(iterator!=NULL){
+        strncpy(p, iterator->data.iban+2, 2);
+        if(strcmp(p,id_string)==0){
+            printf("Account balance: %0.2f\n", iterator->data.balance);
+            return;
+        }
+        iterator=iterator->next;
+    }
+
+}
