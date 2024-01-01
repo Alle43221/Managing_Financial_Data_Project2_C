@@ -68,6 +68,9 @@ struct Node_account * load_accounts(struct Node_account *head, char global_user[
 void print_all_accounts(struct Node_account *head) {
     struct Node_account* iterator=head;
     char types[][10]={"0", "savings", "checking", "credit"};
+    if(head==NULL)
+        printf("No accounts available!\n");
+    else
     while(iterator!=NULL){
 
         printf("%s %s %f\n", iterator->data.iban, types[iterator->data.type-'0'], iterator->data.balance);

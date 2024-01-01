@@ -210,6 +210,9 @@ struct Node_customer* load_customers(struct Node_customer *head, char global_use
 
 void print_all_customers(struct Node_customer *head) {
     struct Node_customer* iterator=head;
+    if(head==NULL)
+        printf("No customers available!\n");
+    else
     while(iterator!=NULL){
         printf("%s %s %s %s %s\n", iterator->data.id_string, iterator->data.name, iterator->data.iban, iterator->data.phone, iterator->data.email);
         iterator=iterator->next;
