@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <direct.h>
+#include "windows.h"
 #include "customers_crud.h"
 #include "accounts_crud.h"
 #include "transactions.h"
@@ -94,6 +96,122 @@ void menu_text(){
     printf("---------------------------------------------\n");
     printf("| 12. Log out                               |\n");
     printf("---------------------------------------------\n");
+    printf("| Admin options:                            |\n");
+    printf("---------------------------------------------\n");
+    printf("| 13. Add client                             |\n");
+    printf("---------------------------------------------\n");
+}
+
+int check_username(char user[]){
+    FILE *file=fopen("users.txt", "r");
+    if(file==NULL){
+        printf("Error opening file at %s\n", "users.txt");
+        return 0;
+    }
+    char username[50], password[50], buffer[100], user_id[17];
+    while(fgets(buffer, 100, file)) {
+        strcpy(username, strtok(buffer, " \n"));
+        strcpy(password, strtok(NULL, " \n"));
+        strcpy(user_id, strtok(NULL, " \n"));
+        if(strcmp(user, username)==0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int check_user_id(char id[17]) {
+    FILE *file=fopen("users.txt", "r");
+    if(file==NULL){
+        printf("Error opening file at %s\n", "users.txt");
+        return 0;
+    }
+    char username[50], password[50], buffer[100], user_id[17];
+    while(fgets(buffer, 100, file)) {
+        strcpy(username, strtok(buffer, " \n"));
+        strcpy(password, strtok(NULL, " \n"));
+        strcpy(user_id, strtok(NULL, " \n"));
+        if(strcmp(id, user_id)==0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int validate_password(char pass[]){
+    if(strlen(pass)<4)
+        return 0;
+    int l= strlen(pass);
+    for (int i=0; i<l; i++){
+        if(pass[i]==' '){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void add_user(char global_user[]){
+    /**
+     * param: char[]
+     * description: creates a new user with a given username, id and password and all the required functions for it
+     * return: void
+     * exceptions: Permission denied
+     */
+    if(strcmp(global_user, "admin")==0){
+        char username[50], string_id[17], password[50]="";
+        int username1=0, id=0;
+        while(username1==0){
+            printf("Enter username:\n");
+            scanf("%50s", username);
+            username1+= validare_string(username);
+            username1+= check_username(username);
+            if(username1!=2){
+                printf("Invalid username!\n");
+                username1=0;
+            }
+        }
+        while(id==0){
+            printf("Enter id:\n");
+            scanf("%17s", string_id);
+            id+= validare_id(string_id);
+            id+=check_user_id(string_id);
+            if(id!=2 || strlen(string_id)!=16){
+                printf("Invalid id!\n");
+                id=0;
+            }
+        }
+        while(strlen(password)<4){
+            printf("Enter password:\n");
+            scanf("%17s", password);
+            if(validate_password(password)==0){
+                printf("Password must be at least 4 characters long and cannot contain spaces!\n");
+            }
+        }
+        _mkdir(username);
+        char path[100];
+        sprintf(path, "./%s/log.txt",username);
+        FILE *file1=fopen(path, "w");
+        sprintf(path, "./%s/accounts.txt",username);
+        FILE *file2=fopen(path, "w");
+        sprintf(path, "./%s/customers.txt",username);
+        FILE *file3=fopen(path, "w");
+        sprintf(path, "./%s/transactions.txt",username);
+        FILE *file4=fopen(path, "w");
+        fclose(file1);
+        fclose(file2);
+        fclose(file3);
+        fclose(file4);
+
+        sprintf(path, "users.txt");
+        FILE *file5=fopen(path, "a");
+        char str[100];
+        sprintf(str, "%s %s %s\n", username, password, string_id);
+        fwrite(str, 1, strlen(str), file5);
+        fclose(file5);
+    }
+    else{
+        printf("Permission denied!\n");
+    }
 }
 
 int main(){
@@ -118,6 +236,9 @@ int main(){
     while(strcmp(menu_choice, "exit")!=0){
         scanf("%100s", menu_choice);
         if(strcmp(menu_choice,"1")==0){
+            if(strcmp("admin", global_user)==0){
+                //global_user=select_user_admin();
+            }
             customers_head=add_customer(customers_head, global_user);
         }
         else if(strcmp(menu_choice,"2")==0){
@@ -160,6 +281,9 @@ int main(){
             customers_head=load_customers(customers_head, global_user);
             accounts_head=load_accounts(accounts_head, global_user);
             menu_text();
+        }
+        else if(strcmp(menu_choice,"13")==0) {
+            add_user(global_user);
         }
         else if(strcmp(menu_choice,"exit")==0){
             return 0;
