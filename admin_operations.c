@@ -15,7 +15,7 @@ void select_user_admin(char global_user[], char user_id[]){
     }
     char username[50], username1[50], buffer[100], pass[50], user[17];
     printf("Enter username:\n");
-    scanf("%50s", username);
+    gets(username);
     while(fgets(buffer, 100, file)) {
         strcpy(username1, strtok(buffer, " \n"));
         strcpy(pass, strtok(NULL, " \n"));
@@ -41,7 +41,7 @@ void add_user(char global_user[]){
         int username1=0, id=0;
         while(username1==0){
             printf("Enter username:\n");
-            scanf("%50s", username);
+            gets(username);
             username1+= validare_string(username);
             username1+= check_username(username);
             if(username1!=2){
@@ -51,7 +51,7 @@ void add_user(char global_user[]){
         }
         while(id==0){
             printf("Enter id:\n");
-            scanf("%17s", string_id);
+            gets(string_id);
             id+= validare_id(string_id);
             id+=check_user_id(string_id);
             if(id!=2 || strlen(string_id)!=16){
@@ -61,7 +61,7 @@ void add_user(char global_user[]){
         }
         while(strlen(password)<4){
             printf("Enter password:\n");
-            scanf("%17s", password);
+            gets(password);
             if(validate_password(password)==0){
                 printf("Password must be at least 4 characters long and cannot contain spaces!\n");
             }

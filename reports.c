@@ -99,7 +99,7 @@ void generate_account_statement(char global_user[], struct Node_account* head) {
     int iban1=0;
     while(iban1==0){
         printf("Enter the account iban:\n");
-        scanf("%25s", iban);
+        gets(iban);
         iban1+=validare_iban(iban);
         if(iban1==0){
             printf("Invalid iban!\n");
@@ -275,7 +275,7 @@ void generate_transaction_register(char global_user[], struct Node_account* head
     int iban1=0, date_1=0, date_2=0;
     while(iban1==0){
         printf("Enter the account iban:\n");
-        scanf("%25s", iban);
+        gets(iban);
         iban1+=validare_iban(iban);
         if(iban1==0){
             printf("Invalid iban!\n");
@@ -283,7 +283,7 @@ void generate_transaction_register(char global_user[], struct Node_account* head
     }
     while(date_1==0){
         printf("Enter the start date (format DD:MM:YYYY):\n");
-        scanf("%15s", date1);
+        gets(date1);
         date_1+= validate_date_format(date1);
         date_1+= validate_date(date1);
         if(date_1!=2){
@@ -296,7 +296,7 @@ void generate_transaction_register(char global_user[], struct Node_account* head
     struct tm info= transform_char_to_tm(copy1);
     while(date_2==0){
         printf("Enter the end date (format DD:MM:YYYY):\n");
-        scanf("%15s", date2);
+        gets( date2);
         date_2+= validate_date_format(date2);
         date_2+= validate_date(date2);
         if(date_2==2){

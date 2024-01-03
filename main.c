@@ -25,14 +25,14 @@ void login_menu(char global_user[], char user_id[])
     char username[50], password[50], buffer[100];
     char username1[50], password1[50];
     printf("Enter username:\n");
-    scanf("%50s", username);
+    gets( username);
     if(strcmp(username, "exit")==0){
         strcpy(global_user,"exit");
         return;
     }
 
     printf("Enter password:\n");
-    scanf("%50s", password);
+    gets(password);
     while(fgets(buffer, 100, file)){
         strcpy(username1, strtok(buffer, " \n"));
         strcpy(password1, strtok(NULL, " \n"));
@@ -138,7 +138,7 @@ int main(){
     accounts_head=load_accounts(accounts_head, global_user);
     menu_text();
     while(strcmp(menu_choice, "exit")!=0){
-        scanf("%100s", menu_choice);
+        gets(menu_choice);
         if(strcmp(menu_choice,"1")==0){
             if(strcmp("admin", global_user)==0){
                 while(strcmp("admin", global_user)==0){

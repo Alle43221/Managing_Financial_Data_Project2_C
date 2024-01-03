@@ -12,7 +12,7 @@ struct Node_account* add_account(struct Node_account *head, char global_user[], 
 
     while (id1==0){
         printf("Enter account id (two digits):\n");
-        scanf("%10s", id_string);
+        gets(id_string);
         id1= validare_id(id_string);
         id1+= check_id_account(head, id_string);
         if(strlen(id_string)==2){
@@ -26,7 +26,7 @@ struct Node_account* add_account(struct Node_account *head, char global_user[], 
 
     while (type1==0){
         printf("Enter account type: savings/checking/credit [1/2/3]\n");
-        scanf("%10s", type);
+        gets(type);
         if(strcmp(type, "1")!=0 && strcmp(type, "2")!=0 && strcmp(type, "3")!=0){
             printf("Invalid type!\n");
         }
@@ -148,7 +148,7 @@ struct Node_account * delete_account(struct Node_account *head, char global_user
     char id_string[10]="";
     while (id1==0){
         printf("Enter account id:\n");
-        scanf("%10s", id_string);
+        gets(id_string);
         id1= validare_id(id_string);
         if(id1!=1){
             printf("Invalid id!\n");
@@ -194,7 +194,7 @@ void check_account_balance(struct Node_account *head){
 
     while (id1==10){
         printf("Enter account id:\n");
-        scanf("%10s", id_string);
+        gets(id_string);
         id1= validare_id(id_string);
         id1+= check_id_account(head, id_string);
         if(id1==2){

@@ -73,3 +73,9 @@
 76	160	7260095953706351	Managing_Financial_Data_Project2_C.exe	4b6fff9d2bd0c21c
 2	79	7260096643463011	CMakeFiles/Managing_Financial_Data_Project2_C.dir/transactions.c.obj	28ccd196c88734ce
 79	164	7260096644283009	Managing_Financial_Data_Project2_C.exe	4b6fff9d2bd0c21c
+7	95	7260102636880007	CMakeFiles/Managing_Financial_Data_Project2_C.dir/accounts_crud.c.obj	acbc0135719f50c7
+11	102	7260102636949998	CMakeFiles/Managing_Financial_Data_Project2_C.dir/customers_crud.c.obj	5f958e09e87c4c92
+19	120	7260102637139990	CMakeFiles/Managing_Financial_Data_Project2_C.dir/reports.c.obj	f2a3116a46a0fa1e
+15	769	7260102643634043	CMakeFiles/Managing_Financial_Data_Project2_C.dir/admin_operations.c.obj	e6a6127c8c401697
+3	788	7260102643829186	CMakeFiles/Managing_Financial_Data_Project2_C.dir/main.c.obj	53639d64520241d0
+788	880	7260102644719190	Managing_Financial_Data_Project2_C.exe	4b6fff9d2bd0c21c

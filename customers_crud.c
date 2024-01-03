@@ -36,7 +36,7 @@ struct Node_customer * delete_customer(struct Node_customer *head, char global_u
     char id_string[10]="";
     while (id1==0){
         printf("Enter customer id:\n");
-        scanf("%10s", id_string);
+        gets(id_string);
         id1= validare_id(id_string);
         if(id1!=1){
             printf("Invalid id!\n");
@@ -81,7 +81,7 @@ void modify_customer(struct Node_customer *head, char global_user[]){
 
     while (name1==0){
         printf("Enter customer name:\n");
-        scanf("%50s", name);
+        gets(name);
         name1=validare_string(name);
         if(name1==0){
             printf("Invalid name!\n");
@@ -90,7 +90,7 @@ void modify_customer(struct Node_customer *head, char global_user[]){
 
     while (iban1==0){
         printf("Enter customer iban:\n");
-        scanf("%25s", iban);
+        gets(iban);
         iban1= validare_iban(iban);
         if(iban1==0){
             printf("Invalid iban!\n");
@@ -99,7 +99,7 @@ void modify_customer(struct Node_customer *head, char global_user[]){
 
     while (phone1==0){
         printf("Enter customer phone number:\n");
-        scanf("%11s", phone);
+        gets(phone);
         phone1= validare_phone(phone);
         if(phone1==0){
             printf("Invalid phone number!\n");
@@ -108,7 +108,7 @@ void modify_customer(struct Node_customer *head, char global_user[]){
 
     while (email1==0){
         printf("Enter customer email address:\n");
-        scanf("%50s", email);
+        gets(email);
         email1= validare_email(email);
         if(email1==0){
             printf("Invalid email address!\n");
@@ -117,7 +117,7 @@ void modify_customer(struct Node_customer *head, char global_user[]){
 
     while (id1==0){
         printf("Enter customer id:\n");
-        scanf("%10s", id_string);
+        gets(id_string);
         id1= validare_id(id_string);
         if(id1!=1){
             printf("Invalid id!\n");
@@ -163,7 +163,7 @@ struct Node_customer* add_customer(struct Node_customer *head, char global_user[
 
     while (name1==0){
         printf("Enter customer name:\n");
-        scanf("%50s", name);
+        gets(name);
         name1=validare_string(name);
         if(name1==0){
             printf("Invalid name!\n");
@@ -172,7 +172,7 @@ struct Node_customer* add_customer(struct Node_customer *head, char global_user[
 
     while (iban1==0){
         printf("Enter customer iban:\n");
-        scanf("%25s", iban);
+        gets(iban);
         iban1= validare_iban(iban);
         if(iban1==0){
             printf("Invalid iban!\n");
@@ -181,7 +181,7 @@ struct Node_customer* add_customer(struct Node_customer *head, char global_user[
 
     while (phone1==0){
         printf("Enter customer phone number:\n");
-        scanf("%11s", phone);
+        gets(phone);
         phone1= validare_phone(phone);
         if(phone1==0){
             printf("Invalid phone number!\n");
@@ -190,7 +190,7 @@ struct Node_customer* add_customer(struct Node_customer *head, char global_user[
 
     while (email1==0){
         printf("Enter customer email address:\n");
-        scanf("%50s", email);
+        gets(email);
         email1= validare_email(email);
         if(email1==0){
             printf("Invalid email address!\n");
@@ -199,7 +199,7 @@ struct Node_customer* add_customer(struct Node_customer *head, char global_user[
 
     while (id1==0){
         printf("Enter customer id:\n");
-        scanf("%10s", id_string);
+        gets(id_string);
         id1= validare_id(id_string);
         id1+= check_id_customer(head, id_string);
         if(id1!=2){
