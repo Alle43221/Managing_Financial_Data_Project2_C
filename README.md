@@ -14,7 +14,7 @@ An  accounting project for managing financial and accounting data, performing fi
 5. **Financial Reporting**: options for generating financial reports, such as account statements, balances, (in work: transaction registers, and expense reports)
 6. **Security and Authentication**: financial data is protected, and users must authenticate to access the accounting system
 7. **Customer Data Management**: users can input and manage information about customers or entities with whom they do business (name, iban, phone number, email)
-8. **Data Export and Import**: exporting financial reports in CSV file format
+8. **Data Export and Import**: exporting financial reports in .TXT file format and transactions in .CSV format
 9. **Input Data Validation**: checks on user-entered data to prevent errors or incorrect data
 10. **Error and Exception Handling**: system for proper error handling and handling exceptional situations that may arise during the accounting process
 11. **Audit and Logging**: an activity log to provide audit capabilities to track changes and activities related to accounts
