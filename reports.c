@@ -173,7 +173,7 @@ void generate_account_statement(char global_user[], struct Node_account* head) {
                     }
                 }
             }
-            sprintf(copy, "Expenses: %0.2f, Income: %0.2f\n,,,,", expenses, income);
+            sprintf(copy, "Expenses: %0.2f, Income: %0.2f,,,,\n", expenses, income);
             fwrite(copy, 1, strlen(copy), file2);
             fclose(file1);
             fclose(file2);
@@ -380,6 +380,141 @@ void generate_transaction_register(char global_user[], struct Node_account* head
 
             time_t t1;
             sprintf(copy, "Generated transaction register for account with iban: %s at %s", iban, ctime(&t1));
+            fwrite(copy, 1, strlen(copy), file1);
+            fclose(file1);
+        }
+        else{
+            printf("Invalid iban!\n");
+        }
+    }
+    else{
+        printf("Permission denied!\n");
+    }
+}
+
+void generate_expense_report(char global_user[], struct Node_account* head) {
+    /**
+     * param: char[], struct Node_account*
+     * description: generates an expense report containing basic information about account (iban),
+     *                  interval of time for transactions (user input) and a short description for each expense
+     *              saves the report in a new file named expense-<date and time>.csv
+     * return: none
+     */
+    char iban[25], date1[15], date2[15];
+    int iban1=0, date_1=0, date_2=0;
+    while(iban1==0){
+        printf("Enter the account iban:\n");
+        gets(iban);
+        iban1+=validare_iban(iban);
+        if(iban1==0){
+            printf("Invalid iban!\n");
+        }
+    }
+    while(date_1==0){
+        printf("Enter the start date (format DD:MM:YYYY):\n");
+        gets(date1);
+        date_1+= validate_date_format(date1);
+        date_1+= validate_date(date1);
+        if(date_1!=2){
+            printf("Invalid date!\n");
+            date_1=0;
+        }
+    }
+    char copy1[25];
+    strcpy(copy1, date1);
+    struct tm info= transform_char_to_tm(copy1);
+    while(date_2==0){
+        printf("Enter the end date (format DD:MM:YYYY):\n");
+        gets( date2);
+        date_2+= validate_date_format(date2);
+        date_2+= validate_date(date2);
+        if(date_2==2){
+            strcpy(copy1, date2);
+            struct tm aux= transform_char_to_tm(copy1);
+            if(validate_second_date(info, aux))
+                date_2++;
+        }
+        if(date_2!=3){
+            printf("Invalid date!\n");
+            date_2=0;
+        }
+    }
+
+    char cod_banca[5], cod_tara[3];
+    strncpy(cod_banca, iban+4, 4);
+    cod_banca[4]='\0';
+    strncpy(cod_tara, iban, 2);
+    cod_tara[2]='\0';
+
+    char buffer1[50], buffer2[50];
+
+    if(strcmp(cod_banca, "ALMO")==0 && strcmp(cod_tara, "RO")==0){
+        char cod_client[17], cod_cont[3];
+        strncpy(cod_client, iban+8, 17);
+        cod_cont[2]='\0';
+        strncpy(cod_cont, iban+2, 2);
+        cod_client[16]='\0';
+        if(check_id_account(head, cod_cont)!=1){
+            char path[100];
+            sprintf(path, "./%s/transactions.csv", global_user);
+            FILE *file1 = fopen(path, "r");
+            if(file1==NULL){
+                printf("Error opening file at %s\n", "users.txt");
+                return;
+            }
+
+            time_t t2 = time(0);
+            struct tm *info1 = localtime( &t2 );
+            strftime(buffer1,50,"%d_%m_%Y_%H_%M_%S", info1);
+            sprintf(path, "expense-%s.csv", buffer1);
+            FILE *file2 = fopen(path, "w");
+            fclose(file2);
+            file2 = fopen(path, "w");
+            if(file2==NULL){
+                printf("Error opening file at %s\n", "users.txt");
+                return;
+            }
+
+            char buffer[100], type[15], sum[15], date[15], time[10], iban2[25], copy[150], desc[50];
+            struct tm end_date= transform_char_to_tm(date2);
+            strftime(buffer1,50,"%d:%m:%Y", &info);
+            strftime(buffer2,50,"%d:%m:%Y", &end_date);
+            sprintf(copy, "Expense report generated for interval: %s to %s,,,,,,,\n"
+                          "For account: %s,,,,,,,\n", buffer1, buffer2, iban);
+            fwrite(copy, 1, strlen(copy), file2);
+            while(fgets(buffer, 100, file1)){
+                strcpy(copy, buffer);
+                strcpy(type, strtok(buffer, ","));
+                strcpy(sum, strtok(NULL, ","));
+                strcpy(date, strtok(NULL, ","));
+                strcpy(time, strtok(NULL, ","));
+                strcpy(iban2, strtok(NULL, ",\n"));
+                struct tm t_time= transform_char_to_tm(date);
+                if(strcmp(iban2, iban)==0){
+                    if(check_date_in_interval(info, end_date, t_time) && sum[0]=='-') {
+                        copy[strlen(copy)-1]='\0';
+                        printf("Write a short description (max 50 characters):");
+                        gets(desc);
+                        strcat(copy, ",");
+                        strcat(copy, desc);
+                        strcat(copy, "\n");
+                        fwrite(copy, 1, strlen(copy), file2);
+                    }
+                }
+            }
+            fclose(file1);
+            fclose(file2);
+            printf("Expense report generated!\n");
+
+            sprintf(path, "./%s/log.txt", global_user);
+            file1 = fopen(path, "a");
+            if(file1==NULL){
+                printf("Error opening file at %s\n", "users.txt");
+                return;
+            }
+
+            time_t t1;
+            sprintf(copy, "Generated expense report for account with iban: %s at %s", iban, ctime(&t1));
             fwrite(copy, 1, strlen(copy), file1);
             fclose(file1);
         }

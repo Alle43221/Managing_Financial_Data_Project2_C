@@ -296,7 +296,16 @@ int main(){
             generate_transaction_register(global_user, accounts_head);
         }
         else if(strcmp(menu_choice,"14")==0){
-
+            if(strcmp("admin", global_user)==0){
+                while(strcmp("admin", global_user)==0){
+                    printf("Please select the user for which you want to access the files\n");
+                    select_user_admin(global_user, user_id);
+                }
+                printf("User changed to %s\n", global_user);
+                customers_head=load_customers(customers_head, global_user);
+                accounts_head=load_accounts(accounts_head, global_user);
+            }
+            generate_expense_report(global_user, accounts_head);
         }
         else if(strcmp(menu_choice,"15")==0){
             printf("Successfully logged out!\n");
