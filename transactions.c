@@ -11,9 +11,10 @@ void save_deposit(struct Node_account* head, char global_user[]){
     char value_string[10], iban[25];
     float value;
     int iban1=0, value1=0;
+    gets(iban);
     while(iban1==0){
         printf("Enter the account iban:\n");
-        scanf("%25s", iban);
+        gets(iban);
         iban1+=validare_iban(iban);
         if(iban1==0){
             printf("Invalid iban!\n");
@@ -22,7 +23,7 @@ void save_deposit(struct Node_account* head, char global_user[]){
 
     while(value1==0){
         printf("Enter the amount:\n");
-        scanf("%10s", value_string);
+        gets(value_string);
         value1+= validate_amount(value_string);
         if(value1==0){
             printf("Invalid value!\n");
@@ -81,7 +82,7 @@ void save_deposit(struct Node_account* head, char global_user[]){
                 }
 
                 strftime(buffer1,50,"%d:%m:%Y,%H:%M:%S", info);
-                sprintf(str, "deposit,+%0.2f,%s,%s\n", value, buffer1, iban);
+                sprintf(str, "deposit,+%0.2f,%s,%s,,\n", value, buffer1, iban);
                 fwrite(str, 1, strlen(str), file2);
                 fclose(file2);
 
@@ -136,9 +137,10 @@ void save_withdrawal(struct Node_account *head, char user_id[], char  global_use
     char value_string[10], iban[25];
     float value;
     int iban1=0, value1=0;
+    gets(iban);
     while(iban1==0){
         printf("Enter the account iban:\n");
-        scanf("%25s", iban);
+        gets(iban);
         iban1+=validare_iban(iban);
         if(iban1==0){
             printf("Invalid iban!\n");
@@ -147,7 +149,7 @@ void save_withdrawal(struct Node_account *head, char user_id[], char  global_use
 
     while(value1==0){
         printf("Enter the amount:\n");
-        scanf("%10s", value_string);
+        gets(value_string);
         value1+= validate_amount(value_string);
         if(value1==0){
             printf("Invalid value!\n");
@@ -192,7 +194,7 @@ void save_withdrawal(struct Node_account *head, char user_id[], char  global_use
                 return;
             }
             strftime(buffer1,50,"%d:%m:%Y,%H:%M:%S", info);
-            sprintf(str, "withdrawal,-%0.2f,%s,%s\n", value,  buffer1,iban);
+            sprintf(str, "withdrawal,-%0.2f,%s,%s,,\n", value,  buffer1,iban);
             fwrite(str, 1, strlen(str), file2);
             fclose(file2);
 
@@ -215,12 +217,13 @@ void save_transfer(struct Node_account* head, char user_id[], char global_user[]
     *            Permission denied
     * return: void
     */
-    char value_string[10], iban[25], iban2[25];
+    char value_string[10], iban[25], iban2[25], description[40];
     float value;
     int iban1 = 0, value1 = 0;
+    gets(iban);
     while (iban1 == 0) {
         printf("Enter the source account iban:\n");
-        scanf("%25s", iban);
+        gets(iban);
         iban1 += validare_iban(iban);
         if (iban1 == 0) {
             printf("Invalid iban!\n");
@@ -230,7 +233,7 @@ void save_transfer(struct Node_account* head, char user_id[], char global_user[]
     iban1 = 0;
     while (iban1 == 0) {
         printf("Enter the destination account iban:\n");
-        scanf("%25s", iban2);
+        gets(iban2);
         iban1 += validare_iban(iban2);
         if (iban1 == 0) {
             printf("Invalid iban!\n");
@@ -239,12 +242,15 @@ void save_transfer(struct Node_account* head, char user_id[], char global_user[]
 
     while (value1 == 0) {
         printf("Enter the amount:\n");
-        scanf("%10s", value_string);
+        gets( value_string);
         value1 += validate_amount(value_string);
         if (value1 == 0) {
             printf("Invalid value!\n");
         }
     }
+
+    printf("Enter a short description (max 40 characters):\n");
+    gets(description);
     value = atof(value_string);
     value = value * 100;
     value = roundf(value);
@@ -310,7 +316,7 @@ void save_transfer(struct Node_account* head, char user_id[], char global_user[]
                             return;
                         }
                         strftime(buffer1,50,"%d:%m:%Y,%H:%M:%S", info);
-                        sprintf(str, "transfer,+%0.2f,%s,%s,%s\n", value, buffer1,iban2, iban);
+                        sprintf(str, "transfer,+%0.2f,%s,%s,%s,\"%s\"\n", value, buffer1,iban2, iban, description);
                         fwrite(str, 1, strlen(str), file2);
                         fclose(file2);
 
@@ -350,7 +356,7 @@ void save_transfer(struct Node_account* head, char user_id[], char global_user[]
                 printf("Error opening file at %s\n", "users.txt");
                 return;
             }
-            sprintf(str, "transfer,-%0.2f,%s,%s,%s\n", value, buffer1,iban, iban2);
+            sprintf(str, "transfer,-%0.2f,%s,%s,%s,\"%s\"\n", value, buffer1,iban, iban2, description);
             fwrite(str, 1, strlen(str), file2);
             fclose(file2);
 
