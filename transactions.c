@@ -74,7 +74,7 @@ void save_deposit(struct Node_account* head, char global_user[]){
                 fwrite(str, 1, strlen(str), file1);
                 fclose(file1);
 
-                sprintf(path, "./%s/transactions.txt", global_user);
+                sprintf(path, "./%s/transactions.csv", global_user);
                 FILE *file2 = fopen(path, "a");
                 if(file2==NULL){
                     printf("Error opening file at %s\n", "users.txt");
@@ -110,7 +110,7 @@ void save_deposit(struct Node_account* head, char global_user[]){
         fwrite(str, 1, strlen(str), file1);
         fclose(file1);
 
-        sprintf(path, "./%s/transactions.txt", global_user);
+        sprintf(path, "./%s/transactions.csv", global_user);
         FILE *file2 = fopen(path, "a");
         if(file2==NULL){
             printf("Error opening file at %s\n", "users.txt");
@@ -187,7 +187,7 @@ void save_withdrawal(struct Node_account *head, char user_id[], char  global_use
             fwrite(str, 1, strlen(str), file1);
             fclose(file1);
 
-            sprintf(path, "./%s/transactions.txt", global_user);
+            sprintf(path, "./%s/transactions.csv", global_user);
             FILE *file2 = fopen(path, "a");
             if(file2==NULL){
                 printf("Error opening file at %s\n", "users.txt");
@@ -309,7 +309,7 @@ void save_transfer(struct Node_account* head, char user_id[], char global_user[]
                         fwrite(str, 1, strlen(str), file1);
                         fclose(file1);
 
-                        sprintf(path, "./%s/transactions.txt", username);
+                        sprintf(path, "./%s/transactions.csv", username);
                         FILE *file2 = fopen(path, "a");
                         if(file2==NULL){
                             printf("Error opening file at %s\n", "users.txt");
@@ -349,7 +349,7 @@ void save_transfer(struct Node_account* head, char user_id[], char global_user[]
             fwrite(str, 1, strlen(str), file1);
             fclose(file1);
 
-            sprintf(path, "./%s/transactions.txt", global_user);
+            sprintf(path, "./%s/transactions.csv", global_user);
             FILE *file2 = fopen(path, "a");
 
             if(file2==NULL){

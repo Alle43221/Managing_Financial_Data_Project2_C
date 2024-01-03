@@ -92,7 +92,7 @@ void generate_account_statement(char global_user[], struct Node_account* head) {
      * param: char[], struct Node_account*
      * description: generates an account statement containing basic information about account (user, iban),
      *                  interval of time for transactions (last month) and expense & income report
-     *              saves the report in a new file named statement-<date and time>.txt
+     *              saves the report in a new file named statement-<date and time>.csv
      * return: none
      */
     char iban[25];
@@ -124,7 +124,7 @@ void generate_account_statement(char global_user[], struct Node_account* head) {
         cod_client[16]='\0';
         if(check_id_account(head, cod_cont)!=1){
             char path[100];
-            sprintf(path, "./%s/transactions.txt", global_user);
+            sprintf(path, "./%s/transactions.csv", global_user);
             FILE *file1 = fopen(path, "r");
             if(file1==NULL){
                 printf("Error opening file at %s\n", "users.txt");
@@ -268,7 +268,7 @@ void generate_transaction_register(char global_user[], struct Node_account* head
      * param: char[], struct Node_account*
      * description: generates a transaction record containing basic information about account (iban),
      *                  interval of time for transactions (user input)
-     *              saves the report in a new file named transaction-<date and time>.txt
+     *              saves the report in a new file named transaction-<date and time>.csv
      * return: none
      */
     char iban[25], date1[15], date2[15];
@@ -327,7 +327,7 @@ void generate_transaction_register(char global_user[], struct Node_account* head
         cod_client[16]='\0';
         if(check_id_account(head, cod_cont)!=1){
             char path[100];
-            sprintf(path, "./%s/transactions.txt", global_user);
+            sprintf(path, "./%s/transactions.csv", global_user);
             FILE *file1 = fopen(path, "r");
             if(file1==NULL){
                 printf("Error opening file at %s\n", "users.txt");

@@ -4,7 +4,7 @@ struct Node_account* add_account(struct Node_account *head, char global_user[], 
     /**
     * param: struct Node_account*, char[], char[]
     * return: struct Node_account* (current address of the start of the list)
-    * description: adds a new account to the list starting at head and into the .../accounts.txt file
+    * description: adds a new account to the list starting at head and into the .../accounts.csv file
     * exception: Error opening file at path
     */
     char id_string[10]="", type[2]="";
@@ -55,7 +55,7 @@ struct Node_account* add_account(struct Node_account *head, char global_user[], 
     fwrite(str, 1, strlen(str), file1);
     fclose(file1);
 
-    sprintf(path, "./%s/accounts.txt",global_user);
+    sprintf(path, "./%s/accounts.csv",global_user);
     FILE *file=fopen(path, "a");
     if(file==NULL){
         printf("Error opening file at %s\n", path);
@@ -72,11 +72,11 @@ struct Node_account * load_accounts(struct Node_account *head, char global_user[
     /**
      * param: struct Node_account*, char[]
      * return: struct Node_account* (current address of the start of the list)
-     * description: loads all the accounts in dynamically allocated list starting at address head from file .../customers.txt
+     * description: loads all the accounts in dynamically allocated list starting at address head from file .../customers.csv
      * exception: Error opening file at path
      */
     char path[100], str[100];
-    sprintf(path, "./%s/accounts.txt",global_user);
+    sprintf(path, "./%s/accounts.csv",global_user);
     FILE *file=fopen(path, "r");
     if(file==NULL){
         printf("Error opening file at %s\n", path);
@@ -115,11 +115,11 @@ void save_accounts_to_file(struct Node_account *head, char global_user[]){
     /**
      * param: struct Node_account*, char[]
      * return: void
-     * description: saves all the accounts in dynamically allocated list starting at address head to file .../accounts.txt
+     * description: saves all the accounts in dynamically allocated list starting at address head to file .../accounts.csv
      * exception: Error opening file at path
      */
     char path[100];
-    sprintf(path, "./%s/accounts.txt",global_user);
+    sprintf(path, "./%s/accounts.csv",global_user);
     FILE *file1=fopen(path, "w");
     if(file1==NULL){
         printf("Error opening file at %s\n", path);
@@ -139,7 +139,7 @@ struct Node_account * delete_account(struct Node_account *head, char global_user
     /**
    * param: struct Node_account*, char[]
    * return: struct Node_account* (current starting address for list)
-   * description: deletes an account identified by id from the list starting at head and from the .../accounts.txt file
+   * description: deletes an account identified by id from the list starting at head and from the .../accounts.csv file
    * exception: Error opening file at path
     *           Account not found
      *          Non-zero balance for selected account!

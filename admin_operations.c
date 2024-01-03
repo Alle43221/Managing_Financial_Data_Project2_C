@@ -70,11 +70,11 @@ void add_user(char global_user[]){
         char path[100];
         sprintf(path, "./%s/log.txt",username);
         FILE *file1=fopen(path, "w");
-        sprintf(path, "./%s/accounts.txt",username);
+        sprintf(path, "./%s/accounts.csv",username);
         FILE *file2=fopen(path, "w");
-        sprintf(path, "./%s/customers.txt",username);
+        sprintf(path, "./%s/customers.csv",username);
         FILE *file3=fopen(path, "w");
-        sprintf(path, "./%s/transactions.txt",username);
+        sprintf(path, "./%s/transactions.csv",username);
         FILE *file4=fopen(path, "w");
         fclose(file1);
         fclose(file2);
