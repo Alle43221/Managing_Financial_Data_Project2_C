@@ -207,11 +207,11 @@ int validate_date(char s[]){
     */
     char copy[11];
     strcpy(copy, s);
-    char *p=strtok(s, "/");
+    char *p=strtok(s, ":");
     int day= atoi(p);
-    p=strtok(NULL, "/");
+    p=strtok(NULL, ":");
     int month= atoi(p);
-    p=strtok(NULL, "/");
+    p=strtok(NULL, ":");
     int year= atoi(p);
 
     if(day<=0 || month<=0 || year<=0)

@@ -198,13 +198,13 @@ struct Node_customer* add_customer(struct Node_customer *head, char global_user[
     }
 
     while (id1==0){
-        id1=0;
         printf("Enter customer id:\n");
         scanf("%10s", id_string);
         id1= validare_id(id_string);
         id1+= check_id_customer(head, id_string);
         if(id1!=2){
             printf("Invalid/Existing id!\n");
+            id1=0;
         }
     }
 

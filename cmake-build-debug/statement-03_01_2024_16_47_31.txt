@@ -1,0 +1,4 @@
+Account statement generated for interval: 03:01:2024 to 03:12:2023
+For user: alemoroz with account: RO16ALMO1200000000000000
+transfer,+10.00,01:01:2024,16:12:00,RO16ALMO1200000000000000,RO16ALMO1000000000000000
+Expenses: 0.00, Income: 10.00

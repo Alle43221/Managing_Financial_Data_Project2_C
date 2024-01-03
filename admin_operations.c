@@ -1,6 +1,6 @@
 #include "admin_operations.h"
 
-void select_user_admin(char global_user[]){
+void select_user_admin(char global_user[], char user_id[]){
     /**
      * param: char[]
      * description: selects the user for which the admin will make various operations
@@ -13,13 +13,16 @@ void select_user_admin(char global_user[]){
         printf("Error opening file at users.txt\n");
         return;
     }
-    char username[50], username1[50], buffer[100];
+    char username[50], username1[50], buffer[100], pass[50], user[17];
     printf("Enter username:\n");
     scanf("%50s", username);
     while(fgets(buffer, 100, file)) {
         strcpy(username1, strtok(buffer, " \n"));
+        strcpy(pass, strtok(NULL, " \n"));
+        strcpy(user, strtok(NULL, " \n"));
         if (strcmp(username, username1) == 0) {
             strcpy(global_user, username);
+            strcpy(user_id, user);
         }
     }
     if(strcmp(global_user, "admin")==0)
