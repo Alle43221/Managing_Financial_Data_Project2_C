@@ -26,6 +26,11 @@ void login_menu(char global_user[], char user_id[])
     char username1[50], password1[50];
     printf("Enter username:\n");
     scanf("%50s", username);
+    if(strcmp(username, "exit")==0){
+        strcpy(global_user,"exit");
+        return;
+    }
+
     printf("Enter password:\n");
     scanf("%50s", password);
     while(fgets(buffer, 100, file)){
@@ -56,7 +61,6 @@ void login_menu(char global_user[], char user_id[])
                 fclose(file);
                 return;
             }
-
         }
     }
     fclose(file);
@@ -258,6 +262,9 @@ int main(){
     welcome_text();
     while(strlen(global_user)==0){
         login_menu(global_user, user_id);
+    }
+    if(strcmp(global_user, "exit")==0){
+        return 0;
     }
     customers_head=load_customers(customers_head, global_user);
     accounts_head=load_accounts(accounts_head, global_user);
