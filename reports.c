@@ -131,7 +131,7 @@ void generate_account_statement(char global_user[], struct Node_account* head) {
                 return;
             }
 
-            sprintf(path, "statement-%s.txt", buffer1);
+            sprintf(path, "statement-%s.csv", buffer1);
             FILE *file2 = fopen(path, "w");
             fclose(file2);
             file2 = fopen(path, "w");
@@ -149,8 +149,8 @@ void generate_account_statement(char global_user[], struct Node_account* head) {
             }
             strftime(buffer1,50,"%d:%m:%Y", info);
             strftime(buffer2,50,"%d:%m:%Y", &end_date);
-            sprintf(copy, "Account statement generated for interval: %s to %s\n"
-                          "For user: %s with account: %s\n", buffer1, buffer2, global_user, iban);
+            sprintf(copy, "Account statement generated for interval: %s to %s,,,,,\n"
+                          "For user: %s with account: %s,,,,,\n", buffer1, buffer2, global_user, iban);
             fwrite(copy, 1, strlen(copy), file2);
             float expenses=0, income=0;
             while(fgets(buffer, 100, file1)){
@@ -173,7 +173,7 @@ void generate_account_statement(char global_user[], struct Node_account* head) {
                     }
                 }
             }
-            sprintf(copy, "Expenses: %0.2f, Income: %0.2f\n", expenses, income);
+            sprintf(copy, "Expenses: %0.2f, Income: %0.2f\n,,,,", expenses, income);
             fwrite(copy, 1, strlen(copy), file2);
             fclose(file1);
             fclose(file2);
@@ -337,7 +337,7 @@ void generate_transaction_register(char global_user[], struct Node_account* head
             time_t t2 = time(0);
             struct tm *info1 = localtime( &t2 );
             strftime(buffer1,50,"%d_%m_%Y_%H_%M_%S", info1);
-            sprintf(path, "transaction-%s.txt", buffer1);
+            sprintf(path, "transaction-%s.csv", buffer1);
             FILE *file2 = fopen(path, "w");
             fclose(file2);
             file2 = fopen(path, "w");
@@ -350,8 +350,8 @@ void generate_transaction_register(char global_user[], struct Node_account* head
             struct tm end_date= transform_char_to_tm(date2);
             strftime(buffer1,50,"%d:%m:%Y", &info);
             strftime(buffer2,50,"%d:%m:%Y", &end_date);
-            sprintf(copy, "Transaction register generated for interval: %s to %s\n"
-                          "For account: %s\n", buffer1, buffer2, iban);
+            sprintf(copy, "Transaction register generated for interval: %s to %s,,,,,\n"
+                          "For account: %s\n,,,,,", buffer1, buffer2, iban);
             fwrite(copy, 1, strlen(copy), file2);
             while(fgets(buffer, 100, file1)){
                 strcpy(copy, buffer);

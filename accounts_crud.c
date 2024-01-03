@@ -197,7 +197,7 @@ void check_account_balance(struct Node_account *head){
         gets(id_string);
         id1= validare_id(id_string);
         id1+= check_id_account(head, id_string);
-        if(id1==2){
+        if(id1!=2){
             printf("Invalid/Non-existing id!\n");
             id1=10;
         }
