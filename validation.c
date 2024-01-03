@@ -130,3 +130,66 @@ int validate_amount(char s[]){
         return 0;
     return 1;
 }
+
+int check_username(char user[]){
+    /**
+    * param: char[]
+    * return: integer (0/1)
+    * description: checks if the string provided corresponds to an unique username
+    */
+    FILE *file=fopen("users.txt", "r");
+    if(file==NULL){
+        printf("Error opening file at %s\n", "users.txt");
+        return 0;
+    }
+    char username[50], password[50], buffer[100], user_id[17];
+    while(fgets(buffer, 100, file)) {
+        strcpy(username, strtok(buffer, " \n"));
+        strcpy(password, strtok(NULL, " \n"));
+        strcpy(user_id, strtok(NULL, " \n"));
+        if(strcmp(user, username)==0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int check_user_id(char id[]) {
+    /**
+    * param: char[]
+    * return: integer (0/1)
+    * description: checks if the string provided corresponds to an unique id
+    */
+    FILE *file=fopen("users.txt", "r");
+    if(file==NULL){
+        printf("Error opening file at %s\n", "users.txt");
+        return 0;
+    }
+    char username[50], password[50], buffer[100], user_id[17];
+    while(fgets(buffer, 100, file)) {
+        strcpy(username, strtok(buffer, " \n"));
+        strcpy(password, strtok(NULL, " \n"));
+        strcpy(user_id, strtok(NULL, " \n"));
+        if(strcmp(id, user_id)==0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int validate_password(char pass[]){
+    /**
+   * param: char[]
+   * return: integer (0/1)
+   * description: checks if the string provided corresponds to a valid password (has at least 4 characters and no spaces)
+   */
+    if(strlen(pass)<4)
+        return 0;
+    int l= strlen(pass);
+    for (int i=0; i<l; i++){
+        if(pass[i]==' '){
+            return 0;
+        }
+    }
+    return 1;
+}

@@ -162,6 +162,10 @@ void save_withdrawal(struct Node_account *head, char user_id[], char  global_use
     strncpy(cod_banca, iban+4, 4);
     strncpy(cod_tara, iban, 2);
     cod_tara[2]='\0';
+
+    char buffer1[50];
+    time_t t1 = time(0);
+    struct tm *info = localtime( &t1 );
     if(strcmp(cod_banca, "ALMO")==0 && strcmp(cod_tara, "RO")==0){
         char cod_client[17], cod_cont[3];
         strncpy(cod_client, iban+8, 17);
@@ -187,11 +191,8 @@ void save_withdrawal(struct Node_account *head, char user_id[], char  global_use
                 printf("Error opening file at %s\n", "users.txt");
                 return;
             }
-            time_t t1;
-            struct tm* info = localtime( &t1 );
-            char buffer[50];
-            strftime(buffer,50,"%d:%m:%Y,%H:%M:%S", info);
-            sprintf(str, "withdrawal,-%0.2f,%s,%s\n", value,  buffer,iban);
+            strftime(buffer1,50,"%d:%m:%Y,%H:%M:%S", info);
+            sprintf(str, "withdrawal,-%0.2f,%s,%s\n", value,  buffer1,iban);
             fwrite(str, 1, strlen(str), file2);
             fclose(file2);
 

@@ -1,33 +1,5 @@
 Login at Sun Dec 31 18:10:01 2023
-Deposited 0.10 in account with iban RO16ALMO1000000000000000 at Sun Dec 31 18:10:06 2023
-Login at Sun Dec 31 18:12:34 2023
-Login at Sun Dec 31 18:13:03 2023
-Deposited 80.00 in account with iban RO17ALMn1000000000000000 at Sun Dec 31 18:13:12 2023
-Login at Sun Dec 31 18:32:38 2023
-Login at Sun Dec 31 18:33:43 2023
-Login at Mon Jan 01 13:05:08 2024
-Login at Mon Jan 01 13:05:23 2024
-Withdraw 100.00 from account with iban RO16ALMO1000000000000000 at Mon Jan 01 13:05:36 2024
-Login at Mon Jan 01 13:07:50 2024
-Withdraw 10.00 from account with iban RO16ALMO1000000000000000 at Mon Jan 01 13:07:55 2024
-Login at Mon Jan 01 13:11:20 2024
-Withdraw 10.00 from account with iban RO16ALMO1000000000000000 at Mon Jan 01 13:11:48 2024
-Login at Mon Jan 01 13:12:21 2024
-Withdraw 10.00 from account with iban RO16ALMO1000000000000000 at Mon Jan 01 13:12:26 2024
-Login at Mon Jan 01 13:13:26 2024
-Withdraw 1.00 from account with iban RO16ALMO1000000000000000 at Mon Jan 01 13:13:34 2024
-Login at Mon Jan 01 14:08:53 2024
-Transferred 16.00 from account with iban RO16ALMO1000000000000000 in account with iban RO17ALMO1200000000000000 at Mon Jan 01 14:09:24 2024
-Login at Mon Jan 01 15:31:30 2024
-Transferred 10.00 from account with iban RO17ALMO1000000000000000 in account with iban RO17ALMO1200000000000000 at Mon Jan 01 15:31:54 2024
-Login at Mon Jan 01 15:45:43 2024
-Transferred 10.00 from account with iban RO17ALMO1000000000000000 in account with iban RO17ALMO1200000000000000 at Mon Jan 01 15:47:29 2024
-Login at Mon Jan 01 16:05:04 2024
-Transferred 10.00 from account with iban RO16ALMO1000000000000000 in account with iban RO16ALMO1200000000000000 at Mon Jan 01 16:05:23 2024
-Login at Mon Jan 01 16:09:58 2024
-Transferred 10.00 from account with iban RO16ALMO1000000000000000 in account with iban RO16ALMO1200000000000000 at Mon Jan 01 16:10:24 2024
-Login at Mon Jan 01 16:11:44 2024
-Transferred 10.00 from account with iban RO16ALMO1000000000000000 in account with iban RO16ALMO1200000000000000 at Mon Jan 01 16:12:00 2024
-Login at Mon Jan 01 22:12:13 2024
-Login at Mon Jan 01 22:12:49 2024
-Login at Mon Jan 01 22:13:03 2024
+Login at Wed Jan 03 14:53:28 2024
+Login at Wed Jan 03 14:55:24 2024
+Login at Wed Jan 03 15:00:50 2024
+Login at Wed Jan 03 15:01:28 2024
