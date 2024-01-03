@@ -106,7 +106,7 @@ void print_all_accounts(struct Node_account *head) {
     else
     while(iterator!=NULL){
 
-        printf("%s %s %f\n", iterator->data.iban, types[iterator->data.type-'0'], iterator->data.balance);
+        printf("%s %s %0.2f\n", iterator->data.iban, types[iterator->data.type-'0'], iterator->data.balance);
         iterator=iterator->next;
     }
 }

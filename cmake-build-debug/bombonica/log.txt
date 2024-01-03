@@ -1,0 +1,6 @@
+Login at Wed Jan 03 19:36:16 2024
+Created account with iban RO26ALMO1234567890123456 at Wed Jan 03 19:36:24 2024
+Created account with iban RO17ALMO1234567890123456 at Wed Jan 03 19:36:32 2024
+Login at Wed Jan 03 19:37:07 2024
+Deposited 900.00 in account with iban RO26ALMO1234567890123456 at Wed Jan 03 19:37:28 2024
+Transferred 10.00 from account with iban RO26ALMO1234567890123456 in account with iban RO16ALMO1200000000000000 at Wed Jan 03 19:38:10 2024

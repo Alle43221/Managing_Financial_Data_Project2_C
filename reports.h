@@ -9,5 +9,6 @@ void generate_account_statement(char global_user[], struct Node_account* head);
 int validate_date(char s[]);
 int validate_date_format(char s[]);
 int validate_second_date(struct tm end_date, struct tm start_date);
+void generate_transaction_register(char global_user[], struct Node_account* head);
 
 #endif
