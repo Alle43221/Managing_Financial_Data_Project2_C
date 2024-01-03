@@ -21,30 +21,25 @@ An  accounting project for managing financial and accounting data, performing fi
 12. **Documentation and Comments**: code with comments to make it easier to understand and Documentation (PDF)
     
 ## Menu
+1. Add customer                           
+2. Delete customer                        
+3. Modify customer                        
+4. Print all customers                    
 ---------------------------------------------
-| Menu:                                     |
+5. Create account                         
+6. Delete account                         
+7. Print all accounts                     
+8. Check account balance                  
 ---------------------------------------------
-| 1. Add customer                           |
-| 2. Delete customer                        |
-| 3. Modify customer                        |
-| 4. Print all customers                    |
+9. Save deposit                           
+10. Save withdrawal                       
+11. Save transaction                      
 ---------------------------------------------
-| 5. Create account                         |
-| 6. Delete account                         |
-| 7. Print all accounts                     |
-| 8. Check account balance                  |
+12. Generate account statement            
+13. Generate transaction register (in work)        
+14. Generate expense report (in work)              
 ---------------------------------------------
-| 9. Save deposit                           |
-| 10. Save withdrawal                       |
-| 11. Save transaction                      |
----------------------------------------------
-| 12. Generate account statement            |
-| 13. Generate transaction register         |
-| 14. Generate expense report               |
----------------------------------------------
-| 15. Log out                               |
----------------------------------------------
-| Admin options:                            |
----------------------------------------------
-| 16. Add client                            |
----------------------------------------------
+15. Log out                               
+
+## Admin options:                            
+16. Add client                            
