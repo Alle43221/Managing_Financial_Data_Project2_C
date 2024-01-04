@@ -17,9 +17,9 @@ void login_menu(char global_user[], char user_id[])
      *            Error opening file at path
      * return: none
      */
-    FILE *file=fopen("users.txt", "r");
+    FILE *file=fopen("users.csv", "r");
     if(file==NULL){
-        printf("Error opening file at users.txt\n");
+        printf("Error opening file at users.csv\n");
         return;
     }
     char username[50], password[50], buffer[100];
@@ -34,9 +34,9 @@ void login_menu(char global_user[], char user_id[])
     printf("Enter password:\n");
     gets(password);
     while(fgets(buffer, 100, file)){
-        strcpy(username1, strtok(buffer, " \n"));
-        strcpy(password1, strtok(NULL, " \n"));
-        strcpy(user_id, strtok(NULL, " \n"));
+        strcpy(username1, strtok(buffer, ",\n"));
+        strcpy(password1, strtok(NULL, ",\n"));
+        strcpy(user_id, strtok(NULL, ",\n"));
         if(strcmp(username, username1)==0){
             if(strcmp(password, password1)==0){
                 printf("Login successfully!\n");

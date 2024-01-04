@@ -47,16 +47,16 @@ void save_deposit(struct Node_account* head, char global_user[]){
         strncpy(cod_cont, iban+2, 2);
 
         char username[50], password[50], buffer[100], user_id[17];
-        FILE *file=fopen("users.txt", "r");
+        FILE *file=fopen("users.csv", "r");
         if(file==NULL){
-            printf("Error opening file at %s\n", "users.txt");
+            printf("Error opening file at %s\n", "users.csv");
             return;
         }
         int gasit=0;
         while(fgets(buffer, 100, file)) {
-            strcpy(username, strtok(buffer, " \n"));
-            strcpy(password, strtok(NULL, " \n"));
-            strcpy(user_id, strtok(NULL, " \n"));
+            strcpy(username, strtok(buffer, ",\n"));
+            strcpy(password, strtok(NULL, ",\n"));
+            strcpy(user_id, strtok(NULL, ",\n"));
             if (strcmp(user_id, cod_client)==0){
                 gasit=1;
 
@@ -77,7 +77,7 @@ void save_deposit(struct Node_account* head, char global_user[]){
                 sprintf(path, "./%s/transactions.csv", global_user);
                 FILE *file2 = fopen(path, "a");
                 if(file2==NULL){
-                    printf("Error opening file at %s\n", "users.txt");
+                    printf("Error opening file at %s\n", path);
                     return;
                 }
 
@@ -113,7 +113,7 @@ void save_deposit(struct Node_account* head, char global_user[]){
         sprintf(path, "./%s/transactions.csv", global_user);
         FILE *file2 = fopen(path, "a");
         if(file2==NULL){
-            printf("Error opening file at %s\n", "users.txt");
+            printf("Error opening file at %s\n", path);
             return;
         }
 
@@ -177,7 +177,7 @@ void save_withdrawal(struct Node_account *head, char user_id[], char  global_use
             sprintf(path, "./%s/log.txt", global_user);
             FILE *file1 = fopen(path, "a");
             if(file1==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
             time_t t;
@@ -190,7 +190,7 @@ void save_withdrawal(struct Node_account *head, char user_id[], char  global_use
             sprintf(path, "./%s/transactions.csv", global_user);
             FILE *file2 = fopen(path, "a");
             if(file2==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
             strftime(buffer1,50,"%d:%m:%Y,%H:%M:%S", info);
@@ -286,12 +286,12 @@ void save_transfer(struct Node_account* head, char user_id[], char global_user[]
             if (strcmp(cod_banca2, "ALMO") == 0 && strcmp(cod_tara2, "RO") == 0) {
 
                 char username[50], password[50], buffer[100], user_id_destination[17];
-                FILE *file = fopen("users.txt", "r");
+                FILE *file = fopen("users.csv", "r");
                 int gasit = 0;
                 while (fgets(buffer, 100, file)) {
-                    strcpy(username, strtok(buffer, " \n"));
-                    strcpy(password, strtok(NULL, " \n"));
-                    strcpy(user_id_destination, strtok(NULL, " \n"));
+                    strcpy(username, strtok(buffer, ",\n"));
+                    strcpy(password, strtok(NULL, ",\n"));
+                    strcpy(user_id_destination, strtok(NULL, ",\n"));
                     if (strcmp(user_id_destination, cod_client_destination) == 0) {
                         gasit = 1;
 
@@ -299,7 +299,7 @@ void save_transfer(struct Node_account* head, char user_id[], char global_user[]
                         sprintf(path, "./%s/log.txt", username);
                         FILE *file1 = fopen(path, "a");
                         if(file1==NULL){
-                            printf("Error opening file at %s\n", "users.txt");
+                            printf("Error opening file at %s\n", path);
                             return;
                         }
                         time_t t;
@@ -312,7 +312,7 @@ void save_transfer(struct Node_account* head, char user_id[], char global_user[]
                         sprintf(path, "./%s/transactions.csv", username);
                         FILE *file2 = fopen(path, "a");
                         if(file2==NULL){
-                            printf("Error opening file at %s\n", "users.txt");
+                            printf("Error opening file at %s\n", path);
                             return;
                         }
                         strftime(buffer1,50,"%d:%m:%Y,%H:%M:%S", info);
@@ -339,7 +339,7 @@ void save_transfer(struct Node_account* head, char user_id[], char global_user[]
             sprintf(path, "./%s/log.txt", global_user);
             FILE *file1 = fopen(path, "a");
             if(file1==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
             time_t t;
@@ -353,7 +353,7 @@ void save_transfer(struct Node_account* head, char user_id[], char global_user[]
             FILE *file2 = fopen(path, "a");
 
             if(file2==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
             sprintf(str, "transfer,-%0.2f,%s,%s,%s,\"%s\"\n", value, buffer1,iban, iban2, description);

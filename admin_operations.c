@@ -8,18 +8,18 @@ void select_user_admin(char global_user[], char user_id[]){
      * exception: Error opening file at path
      *            Invalid username! - no user found
      */
-    FILE *file=fopen("users.txt", "r");
+    FILE *file=fopen("users.csv", "r");
     if(file==NULL){
-        printf("Error opening file at users.txt\n");
+        printf("Error opening file at users.csv\n");
         return;
     }
     char username[50], username1[50], buffer[100], pass[50], user[17];
     printf("Enter username:\n");
     gets(username);
     while(fgets(buffer, 100, file)) {
-        strcpy(username1, strtok(buffer, " \n"));
-        strcpy(pass, strtok(NULL, " \n"));
-        strcpy(user, strtok(NULL, " \n"));
+        strcpy(username1, strtok(buffer, ",\n"));
+        strcpy(pass, strtok(NULL, ",\n"));
+        strcpy(user, strtok(NULL, ",\n"));
         if (strcmp(username, username1) == 0) {
             strcpy(global_user, username);
             strcpy(user_id, user);
@@ -81,8 +81,12 @@ void add_user(char global_user[]){
         fclose(file3);
         fclose(file4);
 
-        sprintf(path, "users.txt");
+        sprintf(path, "users.csv");
         FILE *file5=fopen(path, "a");
+        if(file5==NULL){
+            printf("Error opening file at users.csv\n");
+            return;
+        }
         char str[100];
         sprintf(str, "%s %s %s\n", username, password, string_id);
         fwrite(str, 1, strlen(str), file5);

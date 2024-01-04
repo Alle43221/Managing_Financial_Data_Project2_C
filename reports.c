@@ -127,7 +127,7 @@ void generate_account_statement(char global_user[], struct Node_account* head) {
             sprintf(path, "./%s/transactions.csv", global_user);
             FILE *file1 = fopen(path, "r");
             if(file1==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
 
@@ -136,7 +136,7 @@ void generate_account_statement(char global_user[], struct Node_account* head) {
             fclose(file2);
             file2 = fopen(path, "w");
             if(file2==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
 
@@ -150,7 +150,8 @@ void generate_account_statement(char global_user[], struct Node_account* head) {
             strftime(buffer1,50,"%d:%m:%Y", info);
             strftime(buffer2,50,"%d:%m:%Y", &end_date);
             sprintf(copy, "Account statement generated for interval: %s to %s,,,,,\n"
-                          "For user: %s with account: %s,,,,,\n", buffer1, buffer2, global_user, iban);
+                          "For user: %s with account: %s,,,,,\n"
+                          "type,amount,date,time,first iban,second iban,description\n", buffer1, buffer2, global_user, iban);
             fwrite(copy, 1, strlen(copy), file2);
             float expenses=0, income=0;
             while(fgets(buffer, 100, file1)){
@@ -182,7 +183,7 @@ void generate_account_statement(char global_user[], struct Node_account* head) {
             sprintf(path, "./%s/log.txt", global_user);
             file1 = fopen(path, "a");
             if(file1==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
             sprintf(copy, "Generated account statement for account with iban: %s at %s", iban, ctime(&t1));
@@ -248,13 +249,11 @@ int validate_second_date(struct tm end_date, struct tm start_date){
    * description: checks if the first date comes before the second one
    * preconditions: the string respects the format "DD/MM/YYYY" and is a valid date
    */
-    start_date.tm_year-=1900;
-    end_date.tm_year-=1900;
+
     start_date.tm_hour=0;end_date.tm_hour=0;
     start_date.tm_sec=0;end_date.tm_sec=0;
     start_date.tm_min=0;end_date.tm_min=0;
     start_date.tm_isdst=0;end_date.tm_isdst=0;
-    start_date.tm_mon-=1;end_date.tm_mon-=1;
     int end_date_int=mktime(&end_date);
     int start_date_int=mktime(&start_date);
     int diff_t=end_date_int-start_date_int;
@@ -302,7 +301,7 @@ void generate_transaction_register(char global_user[], struct Node_account* head
         if(date_2==2){
             strcpy(copy1, date2);
             struct tm aux= transform_char_to_tm(copy1);
-            if(validate_second_date(info, aux))
+            if(validate_second_date(aux, info))
                 date_2++;
         }
         if(date_2!=3){
@@ -330,7 +329,7 @@ void generate_transaction_register(char global_user[], struct Node_account* head
             sprintf(path, "./%s/transactions.csv", global_user);
             FILE *file1 = fopen(path, "r");
             if(file1==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
 
@@ -342,7 +341,7 @@ void generate_transaction_register(char global_user[], struct Node_account* head
             fclose(file2);
             file2 = fopen(path, "w");
             if(file2==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
 
@@ -351,7 +350,8 @@ void generate_transaction_register(char global_user[], struct Node_account* head
             strftime(buffer1,50,"%d:%m:%Y", &info);
             strftime(buffer2,50,"%d:%m:%Y", &end_date);
             sprintf(copy, "Transaction register generated for interval: %s to %s,,,,,\n"
-                          "For account: %s\n,,,,,", buffer1, buffer2, iban);
+                          "For account: %s,,,,,\n"
+                          "type,amount,date,time,first iban,second iban,description\n", buffer1, buffer2, iban);
             fwrite(copy, 1, strlen(copy), file2);
             while(fgets(buffer, 100, file1)){
                 strcpy(copy, buffer);
@@ -374,7 +374,7 @@ void generate_transaction_register(char global_user[], struct Node_account* head
             sprintf(path, "./%s/log.txt", global_user);
             file1 = fopen(path, "a");
             if(file1==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
 
@@ -431,7 +431,7 @@ void generate_expense_report(char global_user[], struct Node_account* head) {
         if(date_2==2){
             strcpy(copy1, date2);
             struct tm aux= transform_char_to_tm(copy1);
-            if(validate_second_date(info, aux))
+            if(validate_second_date(aux, info))
                 date_2++;
         }
         if(date_2!=3){
@@ -459,7 +459,7 @@ void generate_expense_report(char global_user[], struct Node_account* head) {
             sprintf(path, "./%s/transactions.csv", global_user);
             FILE *file1 = fopen(path, "r");
             if(file1==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
 
@@ -471,7 +471,7 @@ void generate_expense_report(char global_user[], struct Node_account* head) {
             fclose(file2);
             file2 = fopen(path, "w");
             if(file2==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
 
@@ -480,7 +480,8 @@ void generate_expense_report(char global_user[], struct Node_account* head) {
             strftime(buffer1,50,"%d:%m:%Y", &info);
             strftime(buffer2,50,"%d:%m:%Y", &end_date);
             sprintf(copy, "Expense report generated for interval: %s to %s,,,,,,,\n"
-                          "For account: %s,,,,,,,\n", buffer1, buffer2, iban);
+                          "For account: %s,,,,,,,\n"
+                          "type,amount,date,time,first iban,second iban,description,reason\n", buffer1, buffer2, iban);
             fwrite(copy, 1, strlen(copy), file2);
             while(fgets(buffer, 100, file1)){
                 strcpy(copy, buffer);
@@ -493,11 +494,13 @@ void generate_expense_report(char global_user[], struct Node_account* head) {
                 if(strcmp(iban2, iban)==0){
                     if(check_date_in_interval(info, end_date, t_time) && sum[0]=='-') {
                         copy[strlen(copy)-1]='\0';
-                        printf("Write a short description (max 50 characters):");
+                        printf("%s", copy);
+                        printf("\n");
+                        printf("Write a short description for the expense (max 50 characters):");
                         gets(desc);
-                        strcat(copy, ",");
+                        strcat(copy, ",\"");
                         strcat(copy, desc);
-                        strcat(copy, "\n");
+                        strcat(copy, "\"\n");
                         fwrite(copy, 1, strlen(copy), file2);
                     }
                 }
@@ -509,7 +512,7 @@ void generate_expense_report(char global_user[], struct Node_account* head) {
             sprintf(path, "./%s/log.txt", global_user);
             file1 = fopen(path, "a");
             if(file1==NULL){
-                printf("Error opening file at %s\n", "users.txt");
+                printf("Error opening file at %s\n", path);
                 return;
             }
 
