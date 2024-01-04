@@ -80,8 +80,8 @@ struct Node_user* delete_by_id_user(struct Node_user* head, char id[]){
 
 void modify_user_by_id(struct Node_user *head, char id_string[], char pass[]) {
     /**
-    * param: struct Node_account*, char[], float
-    * description: modifies an account with a given id and data in the dynamically allocated list
+    * param: struct Node_user*, char[], char[]
+    * description: modifies a user with a given id and data in the dynamically allocated list
     * return: void
     */
     struct Node_user* iterator=head;
