@@ -203,13 +203,13 @@ struct Node_user * reset_password(struct Node_user *head) {
     /**
    * param: struct Node_user*
    * return: struct Node_user* (current starting address for list)
-   * description: deletes a user identified by id from the list starting at head and from the users.csv file
+   * description: resets the password for an user identified by id from the list starting at head and from the users.csv file
    * exception: Error opening file at path
     *           User not found
    */
 
     int id1=0;
-    char id_string[17]="", password[30];
+    char id_string[17]="", password[30]="";
     while (id1==0){
         printf("Enter user id:\n");
         gets(id_string);
@@ -223,6 +223,7 @@ struct Node_user * reset_password(struct Node_user *head) {
         gets(password);
         if(validate_password(password)==0){
             printf("Password must be at least 4 characters long and cannot contain spaces!\n");
+            strcpy(password, "");
         }
     }
     int rez= check_user_id(id_string);

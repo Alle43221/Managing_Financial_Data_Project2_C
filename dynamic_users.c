@@ -62,8 +62,10 @@ struct Node_user* delete_by_id_user(struct Node_user* head, char id[]){
             remove(path);
             sprintf(path, "%s/log.txt", iterator->next->data.username);
             remove(path);
-            sprintf(path, "/%s", iterator->next->data.username);
-            remove(path);
+            sprintf(path, "%s", iterator->next->data.username);
+            char cmd[100];
+            sprintf(cmd, "rmdir %s", path);
+            int ret = system(cmd);
             struct Node_user* copy=iterator->next;
             iterator->next=iterator->next->next;
             free(copy);
@@ -83,10 +85,8 @@ void modify_user_by_id(struct Node_user *head, char id_string[], char pass[]) {
     * return: void
     */
     struct Node_user* iterator=head;
-    char p[3];
     while(iterator!=NULL){
-        strncpy(p, iterator->data.id, 2);
-        if(strcmp(p,id_string)==0){
+        if(strcmp(iterator->data.id,id_string)==0){
             strcpy(iterator->data.password, pass);
             return;
         }

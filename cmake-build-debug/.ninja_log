@@ -46,3 +46,12 @@
 5	71	7260848641149218	CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_accounts.c.obj	1c21b365b0785313
 8	71	7260848641159232	CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_users.c.obj	9613738c95951da3
 71	155	7260848641971267	Managing_Financial_Data_Project2_C.exe	dcf59128859a802
+2	78	7260890485616333	CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_customers.c.obj	bb8fa4ea61008e53
+11	81	7260890485666333	CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_users.c.obj	9613738c95951da3
+8	88	7260890485736307	CMakeFiles/Managing_Financial_Data_Project2_C.dir/customers_crud.c.obj	5f958e09e87c4c92
+6	620	7260890491062831	CMakeFiles/Managing_Financial_Data_Project2_C.dir/main.c.obj	53639d64520241d0
+621	753	7260890492368939	Managing_Financial_Data_Project2_C.exe	dcf59128859a802
+2	567	7260893621805948	CMakeFiles/Managing_Financial_Data_Project2_C.dir/admin_operations.c.obj	e6a6127c8c401697
+568	658	7260893622701724	Managing_Financial_Data_Project2_C.exe	dcf59128859a802
+2	61	7260900150825712	CMakeFiles/Managing_Financial_Data_Project2_C.dir/dynamic_users.c.obj	9613738c95951da3
+61	144	7260900151625715	Managing_Financial_Data_Project2_C.exe	dcf59128859a802
