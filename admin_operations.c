@@ -34,10 +34,10 @@ void add_user(char global_user[]){
      * param: char[]
      * description: creates a new user with a given username, id and password and all the required functions for it
      * return: void
-     * exceptions: Permission denied
+     * exceptions: Permission denied/Error opening file at path
      */
     if(strcmp(global_user, "admin")==0){
-        char username[50], string_id[17], password[50]="";
+        char username[50], string_id[17], password[30]="";
         int username1=0, id=0;
         while(username1==0){
             printf("Enter username:\n");

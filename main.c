@@ -22,8 +22,8 @@ void login_menu(char global_user[], char user_id[])
         printf("Error opening file at users.csv\n");
         return;
     }
-    char username[50], password[50], buffer[100];
-    char username1[50], password1[50];
+    char username[50], password[30], buffer[100];
+    char username1[50], password1[30];
     printf("Enter username:\n");
     gets( username);
     if(strcmp(username, "exit")==0){

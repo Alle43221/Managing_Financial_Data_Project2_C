@@ -94,6 +94,8 @@ void generate_account_statement(char global_user[], struct Node_account* head) {
      *                  interval of time for transactions (last month) and expense & income report
      *              saves the report in a new file named statement-<date and time>.csv
      * return: none
+     * exception: Error opening file at path
+     *            Permission denied
      */
     char iban[25];
     int iban1=0;
@@ -247,7 +249,7 @@ int validate_second_date(struct tm end_date, struct tm start_date){
    * param: tm datetime obj, tm datetime obj
    * return: integer (0/1)
    * description: checks if the first date comes before the second one
-   * preconditions: the string respects the format "DD/MM/YYYY" and is a valid date
+   * preconditions: both dates are valid dates
    */
 
     start_date.tm_hour=0;end_date.tm_hour=0;
@@ -269,6 +271,8 @@ void generate_transaction_register(char global_user[], struct Node_account* head
      *                  interval of time for transactions (user input)
      *              saves the report in a new file named transaction-<date and time>.csv
      * return: none
+     * exception: Error opening file at path
+     *            Permission denied
      */
     char iban[25], date1[15], date2[15];
     int iban1=0, date_1=0, date_2=0;
@@ -398,6 +402,8 @@ void generate_expense_report(char global_user[], struct Node_account* head) {
      * description: generates an expense report containing basic information about account (iban),
      *                  interval of time for transactions (user input) and a short description for each expense
      *              saves the report in a new file named expense-<date and time>.csv
+     * exception: Error opening file at path
+     *            Permission denied
      * return: none
      */
     char iban[25], date1[15], date2[15];
