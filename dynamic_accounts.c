@@ -75,8 +75,8 @@ struct Node_account* delete_by_id_account(struct Node_account* head, char id[]){
         free(iterator);
         return head;
     }
-    while(iterator!=NULL){
-        strncpy(p, iterator->data.iban+2, 2);
+    while(iterator->next!=NULL){
+        strncpy(p, iterator->next->data.iban+2, 2);
         if(strcmp(p,id)==0){
             struct Node_account* copy=iterator->next;
             if(iterator->next!=NULL)
