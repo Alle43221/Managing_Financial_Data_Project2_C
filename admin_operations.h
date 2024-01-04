@@ -16,6 +16,6 @@ struct Node_user* add_user(struct Node_user* head);
 struct Node_user * load_users(struct Node_user *head);
 void save_users_to_file(struct Node_user *head);
 struct Node_user * delete_user(struct Node_user *head);
-struct Node_user * reset_password(struct Node_user *head);
+void reset_password(struct Node_user *head);
 
 #endif

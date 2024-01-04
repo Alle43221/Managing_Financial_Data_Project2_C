@@ -199,7 +199,7 @@ struct Node_user * delete_user(struct Node_user *head) {
     return head;
 }
 
-struct Node_user * reset_password(struct Node_user *head) {
+void reset_password(struct Node_user *head) {
     /**
    * param: struct Node_user*
    * return: struct Node_user* (current starting address for list)
@@ -237,7 +237,7 @@ struct Node_user * reset_password(struct Node_user *head) {
         FILE *file1=fopen(path, "a");
         if(file1==NULL){
             printf("Error opening file at %s\n", path);
-            return head;
+            return;
         }
         time_t t;
         time(&t);
