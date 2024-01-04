@@ -156,8 +156,8 @@ struct Node_account * delete_account(struct Node_account *head, char global_user
     }
     int rez= check_id_account(head, id_string);
 
-    head=delete_by_id_account(head, id_string);
     if(rez==0){
+        head=delete_by_id_account(head, id_string);
         printf("Account deleted with success!\n");
         char path[100];
         sprintf(path, "./%s/log.txt",global_user);

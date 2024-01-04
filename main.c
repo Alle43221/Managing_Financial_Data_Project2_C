@@ -112,6 +112,8 @@ void menu_text(){
     printf("| Admin options:                            |\n");
     printf("---------------------------------------------\n");
     printf("| 16. Add client                            |\n");
+    printf("| 17. Delete client                         |\n");
+    printf("| 18. Reset password                        |\n");
     printf("---------------------------------------------\n");
 }
 
@@ -126,6 +128,7 @@ int main(){
     char user_id[17]="";
     struct Node_customer* customers_head=NULL;
     struct Node_account* accounts_head=NULL;
+    struct Node_user* users_head=NULL;
     char menu_choice[100];
     welcome_text();
     while(strlen(global_user)==0){
@@ -136,6 +139,7 @@ int main(){
     }
     customers_head=load_customers(customers_head, global_user);
     accounts_head=load_accounts(accounts_head, global_user);
+    users_head= load_users(users_head);
     menu_text();
     while(strcmp(menu_choice, "exit")!=0){
         gets(menu_choice);
@@ -319,7 +323,30 @@ int main(){
             menu_text();
         }
         else if(strcmp(menu_choice,"16")==0) {
-            add_user(global_user);
+            if(strcmp(global_user, "admin")==0){
+                users_head=add_user(users_head);
+            }
+            else{
+                printf("Permission denied!\n");
+            }
+        }
+        else if(strcmp(menu_choice,"17")==0) {
+            if(strcmp(global_user, "admin")==0){
+                users_head= delete_user(users_head);
+                save_users_to_file(users_head);
+            }
+            else{
+                printf("Permission denied!\n");
+            }
+        }
+        else if(strcmp(menu_choice,"18")==0) {
+            if(strcmp(global_user, "admin")==0){
+                reset_password(users_head);
+                save_users_to_file(users_head);
+            }
+            else{
+                printf("Permission denied!\n");
+            }
         }
         else if(strcmp(menu_choice,"exit")==0){
             return 0;

@@ -91,10 +91,11 @@ struct Node_customer* delete_by_id_customer(struct Node_customer* head, char id[
         free(iterator);
         return head;
     }
-    while(iterator->next!=NULL){
+    while(iterator!=NULL){
         if(strcmp(iterator->next->data.id_string, id)==0){
             struct Node_customer* copy=iterator->next;
-            iterator->next=iterator->next->next;
+            if(iterator->next!=NULL)
+                iterator->next=iterator->next->next;
             free(copy);
             return head;
         }

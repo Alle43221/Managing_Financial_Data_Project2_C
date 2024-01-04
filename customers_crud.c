@@ -43,8 +43,8 @@ struct Node_customer * delete_customer(struct Node_customer *head, char global_u
         }
     }
     int rez= check_id_customer(head, id_string);
-    head=delete_by_id_customer(head, id_string);
     if(rez==0){
+        head=delete_by_id_customer(head, id_string);
         printf("Customer deleted with success!\n");
         char path[100];
         sprintf(path, "./%s/log.txt",global_user);

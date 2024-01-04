@@ -36,5 +36,20 @@ struct Node_account{
     struct Node_account* next;
 };
 
+struct user{
+    /**
+     * structure containing data for a user
+     */
+    char id[17], username[50], password[30];
+};
+
+struct Node_user{
+    /**
+     * node structure for dynamically allocated list consisting of user objects
+     */
+    struct user data;
+    struct Node_user* next;
+};
+
 
 #endif
