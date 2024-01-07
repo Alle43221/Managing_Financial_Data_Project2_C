@@ -166,6 +166,7 @@ struct Node_user * delete_user(struct Node_user *head) {
    */
     int id1=0;
     char id_string[17]="";
+
     while (id1==0){
         printf("Enter user id:\n");
         gets(id_string);
@@ -173,6 +174,11 @@ struct Node_user * delete_user(struct Node_user *head) {
         if(id1!=1 || strlen(id_string)!=16){
             printf("Invalid id!\n");
         }
+    }
+    if(strcmp(id_string, "1000000000000000")==0)
+    {
+        printf("Cannot delete admin account!\n");
+        return head;
     }
     int rez= check_user_id(id_string);
 
