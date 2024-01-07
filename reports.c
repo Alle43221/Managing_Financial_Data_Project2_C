@@ -256,9 +256,9 @@ int validate_second_date(struct tm end_date, struct tm start_date){
     start_date.tm_sec=0;end_date.tm_sec=0;
     start_date.tm_min=0;end_date.tm_min=0;
     start_date.tm_isdst=0;end_date.tm_isdst=0;
-    int end_date_int=mktime(&end_date);
-    int start_date_int=mktime(&start_date);
-    int diff_t=end_date_int-start_date_int;
+    long long int end_date_int=mktime(&end_date);
+    long long int start_date_int=mktime(&start_date);
+    long long int diff_t=end_date_int-start_date_int;
     if(diff_t<0)
         return 0;
     return 1;

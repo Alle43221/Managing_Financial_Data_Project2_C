@@ -1,2 +1,4 @@
 Login at Thu Jan 04 11:55:58 2024
-Generated transaction register for account with iban: RO16ALMO1200000000000000 at (null)
+Generated transaction register for account with iban: RO16ALMO1200000000000000 at (null)Login at Sun Jan 07 15:08:24 2024
+Login at Sun Jan 07 15:08:45 2024
+Login at Sun Jan 07 15:12:52 2024
