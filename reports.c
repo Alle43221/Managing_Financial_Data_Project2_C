@@ -309,7 +309,7 @@ void generate_transaction_register(char global_user[], struct Node_account* head
                 date_2++;
         }
         if(date_2!=3){
-            printf("Invalid date!\n");
+            printf("Invalid date!/Invalid interval for report!\n");
             date_2=0;
         }
     }
@@ -441,7 +441,7 @@ void generate_expense_report(char global_user[], struct Node_account* head) {
                 date_2++;
         }
         if(date_2!=3){
-            printf("Invalid date!\n");
+            printf("Invalid date!/Invalid interval for report!\n");
             date_2=0;
         }
     }
