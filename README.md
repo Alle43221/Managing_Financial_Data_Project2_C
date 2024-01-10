@@ -6,7 +6,7 @@ There may be errors on loading the information from files. These are because of 
 ## Overview
 A console C application to simulate the management of financial data in the form of transactions.\
 Author: Moroz Alexandra-Ioana, UBB informatica romana\
-[Presentation video](to be added)
+[Presentation video]([to be added](https://ubbcluj-my.sharepoint.com/:v:/g/personal/alexandra_moroz_stud_ubbcluj_ro/EQrHprpL2hNGkVHVDDmraggBG20VwL6dqqzolMavg9al9w?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=rp2qTE))
 
 ## Features
 An  accounting project for managing financial and accounting data, performing financial calculations, generating reports, and ensuring data security.
