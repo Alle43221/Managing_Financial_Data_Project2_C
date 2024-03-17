@@ -1,5 +1,8 @@
 # Managing_Financial_Data_Project1_C
 
+![image](https://github.com/Alle43221/Managing_Financial_Data_Project2_C/assets/79206599/f2832776-b148-46a5-a007-b8d1f0897989)
+
+
 ## Warning! 
 There may be errors on loading the information from files. These are because of the different aproach the systems Windows and Unix have on entering the newline character (Windows inserts the invisible character CR defore newline). That's why if such problems are encountered, the files can be first open with a generic text editor like Notepad++ and saved in a different encoding, correspoding to the system that will host the files.
 
